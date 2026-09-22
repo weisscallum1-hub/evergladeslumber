@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Everglades Lumber Exchange | South Florida Materials Sourcing & Supplier Quotes</title>
+<meta name="description" content="Everglades Lumber Exchange connects South Florida contractors, builders and homeowners with lumber yards and building material suppliers. Submit a material list, get supplier-ready quotes fast.">
+<meta name="keywords" content="lumber quotes miami, south florida lumber suppliers, building materials miami, framing lumber broward, plywood miami, pressure treated lumber miami, contractor material sourcing florida">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#153D2E">
+<link rel="canonical" href="https://evergladeslumber.com/">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://evergladeslumber.com/">
+<meta property="og:title" content="Everglades Lumber Exchange | South Florida Materials Sourcing">
+<meta property="og:description" content="Turn a rough material list into a supplier-ready quote request. Independent sourcing marketplace for South Florida contractors and builders.">
+<meta property="og:image" content="https://evergladeslumber.com/assets/og-image.png">
+
+<!-- Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Everglades Lumber Exchange",
+  "alternateName": "ELX",
+  "url": "https://evergladeslumber.com",
+  "description": "Independent materials sourcing marketplace connecting South Florida contractors with lumber yards and building material suppliers.",
+  "areaServed": {
+    "@type": "State",
+    "name": "Florida",
+    "containsPlace": [
+      {"@type": "City", "name": "Miami"},
+      {"@type": "City", "name": "Fort Lauderdale"},
+      {"@type": "City", "name": "Boca Raton"},
+      {"@type": "City", "name": "Hollywood"},
+      {"@type": "City", "name": "Hialeah"}
+    ]
+  },
+  "serviceType": "Building Materials Sourcing",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "hello@evergladeslumber.com",
+    "contactType": "customer service"
+  }
+}
+</script>
+
+<style>
+:root{
+  --green:#153D2E;
+  --green-2:#0c2c22;
+  --green-3:#1a4d38;
+  --sand:#D4B883;
+  --sand-2:#EFE4D0;
+  --sand-3:#f7f0e4;
+  --ink:#202622;
+  --muted:#68716d;
+  --paper:#F8F7F2;
+  --white:#fff;
+  --line:#dde2dd;
+  --shadow:0 20px 60px rgba(20,38,30,.10);
+  --shadow-sm:0 4px 16px rgba(20,38,30,.07);
+  --radius:20px;
+  --max:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--paper);color:var(--ink);line-height:1.6}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* Layout */
+.container{width:min(var(--max),92vw);margin:0 auto}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:30;background:rgba(248,247,242,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(21,61,46,.08)}
+.nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;color:var(--green)}
+.brand svg{width:40px;height:40px;flex-shrink:0}
+.brand-text{letter-spacing:.08em;font-size:.87rem;line-height:1.1}
+.brand-text small{display:block;color:var(--muted);font-weight:600;letter-spacing:.14em;font-size:.56rem;margin-top:2px}
+.nav-links{display:flex;gap:24px;align-items:center;font-size:.92rem;color:#47514c}
+.nav-links a:hover{color:var(--green)}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;padding:13px 22px;font-weight:800;font-size:.92rem;cursor:pointer;transition:.18s transform,.18s box-shadow,.18s background;font-family:inherit}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--green);color:#fff;box-shadow:0 8px 24px rgba(21,61,46,.20)}
+.btn-primary:hover{background:var(--green-3);box-shadow:0 12px 32px rgba(21,61,46,.28)}
+.btn-secondary{background:#fff;color:var(--green);border:1.5px solid var(--line)}
+.btn-secondary:hover{border-color:var(--green)}
+.btn-sand{background:var(--sand);color:#182118}
+.btn-sand:hover{background:#c9aa74}
+.btn-lg{padding:16px 28px;font-size:1rem}
+
+/* Hero */
+.hero{padding:88px 0 60px;overflow:hidden;background:radial-gradient(circle at 78% 5%,rgba(212,184,131,.15),transparent 38%),linear-gradient(180deg,#fcfbf6 0%,#f2f3ec 100%)}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:52px;align-items:center}
+.kicker{display:inline-flex;gap:8px;align-items:center;padding:8px 14px;background:#fff;border:1px solid var(--line);border-radius:999px;color:var(--green);font-weight:800;font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;margin-bottom:22px}
+.kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--sand);flex-shrink:0}
+h1{font-size:clamp(2.6rem,5.5vw,5.2rem);line-height:.97;letter-spacing:-.055em;color:var(--green);margin-bottom:22px}
+.hero-sub{font-size:1.12rem;color:#55605a;max-width:580px;line-height:1.65}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0 22px}
+.trust-row{display:flex;gap:18px;flex-wrap:wrap;color:#6c746f;font-size:.85rem}
+.trust-row span{display:flex;gap:7px;align-items:center}
+.trust-row b{color:var(--green)}
+
+/* Hero card */
+.hero-card{background:#163f30;border-radius:30px;padding:26px;box-shadow:0 32px 72px rgba(15,30,22,.26);position:relative;overflow:hidden;color:#fff}
+.hero-card::before{content:"";position:absolute;width:280px;height:280px;border-radius:50%;background:rgba(212,184,131,.10);right:-80px;top:-80px;pointer-events:none}
+.scout-label{font-weight:900;letter-spacing:.12em;font-size:.7rem;opacity:.7;margin-bottom:14px}
+.scout-window{background:#fbfbf8;color:var(--ink);border-radius:22px;padding:18px;min-height:360px;border:1px solid rgba(255,255,255,.15)}
+.scout-top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:14px}
+.dots{display:flex;gap:5px}
+.dots i{width:7px;height:7px;border-radius:50%;background:#c6cec7;display:block}
+.scout-title{font-size:.76rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+.chat{display:grid;gap:11px}
+.bubble{max-width:86%;padding:11px 14px;border-radius:15px;font-size:.88rem;line-height:1.5}
+.bubble.bot{background:#edf2ee}
+.bubble.user{justify-self:end;background:var(--green);color:#fff}
+.tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tag{border:1px solid var(--line);border-radius:999px;padding:4px 9px;font-size:.71rem;background:white;color:var(--ink)}
+.scout-note{margin-top:10px;border-radius:14px;padding:12px 14px;background:var(--sand-3);border:1px solid #e5d2b0;font-size:.84rem;color:#6b5a35}
+
+/* Alert notice */
+.alert-notice{background:linear-gradient(135deg,#fff8ed,#fdf3e0);border:1px solid #e8d09a;border-radius:16px;padding:18px 22px;margin:32px 0 0;display:flex;gap:14px;align-items:flex-start}
+.alert-icon{font-size:1.4rem;flex-shrink:0;line-height:1}
+.alert-notice p{font-size:.88rem;color:#5c4a20;line-height:1.55}
+.alert-notice strong{color:#3b2d12}
+
+/* Sections */
+.section{padding:96px 0}
+.section-tight{padding:60px 0}
+.section-head{max-width:740px;margin-bottom:40px}
+.eyebrow{font-size:.76rem;text-transform:uppercase;letter-spacing:.18em;font-weight:900;color:#8a6f43;margin-bottom:10px}
+.section h2{font-size:clamp(2rem,4vw,3.3rem);line-height:1.07;letter-spacing:-.04em;color:var(--green);margin:12px 0 16px}
+.section-lead{color:#66706b;font-size:1.04rem;max-width:640px}
+
+/* Band */
+.band{background:var(--green);color:white}
+.band .eyebrow{color:var(--sand);opacity:.9}
+.band h2,.band .section-lead{color:white}
+.band .section-lead{opacity:.80}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.step{padding:28px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm)}
+.num{width:38px;height:38px;border-radius:12px;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:900;font-size:1.05rem;margin-bottom:18px}
+.step h3{font-size:1.16rem;color:var(--green);margin-bottom:8px}
+.step p{color:var(--muted);font-size:.94rem}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.stat{padding:20px 0;border-top:1px solid rgba(255,255,255,.16)}
+.stat strong{display:block;font-size:2.2rem;color:var(--sand);font-weight:900;line-height:1}
+.stat span{font-size:.9rem;opacity:.76;margin-top:5px;display:block}
+
+/* Category grid */
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:var(--shadow-sm)}
+.card-icon{width:46px;height:46px;border-radius:14px;background:var(--sand-2);display:grid;place-items:center;font-weight:900;font-size:1.1rem;color:var(--green);margin-bottom:15px}
+.card h3{font-size:1.06rem;color:var(--green);margin-bottom:7px}
+.card p{color:var(--muted);font-size:.9rem;line-height:1.5}
+
+/* Two col panels */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:30px;box-shadow:var(--shadow-sm)}
+.panel h2{color:var(--green);margin-bottom:10px}
+.panel .section-lead{margin-bottom:22px}
+
+/* Forms */
+form{display:grid;gap:14px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:grid;gap:6px}
+.field.full{grid-column:1/-1}
+label{font-size:.79rem;font-weight:800;color:#45504a;letter-spacing:.02em}
+.field input,.field select,.field textarea{width:100%;border:1.5px solid #d3d9d4;border-radius:12px;background:#fbfbf9;padding:12px 14px;font:inherit;font-size:.95rem;color:var(--ink);outline:none;transition:.15s border-color,.15s box-shadow}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(21,61,46,.09)}
+textarea{min-height:130px;resize:vertical}
+.form-note{font-size:.78rem;color:#7a827e;line-height:1.5}
+.form-success{padding:14px 16px;border-radius:12px;background:#eaf3eb;color:var(--green);font-weight:700;display:none;margin-top:4px;font-size:.9rem}
+
+/* Pricing */
+.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.price-card{background:#fff;border:1.5px solid var(--line);border-radius:22px;padding:28px;position:relative}
+.price-card.featured{border-color:var(--green);transform:translateY(-6px);box-shadow:var(--shadow)}
+.price-card small{color:var(--muted);font-weight:800;font-size:.78rem}
+.price{font-size:2.4rem;font-weight:900;color:var(--green);margin:8px 0 4px;line-height:1}
+.price span{font-size:.88rem;color:var(--muted);font-weight:700}
+.price-card > p{color:var(--muted);font-size:.9rem;margin-bottom:16px}
+.price-card ul{list-style:none;display:grid;gap:8px;margin-bottom:20px}
+.price-card li{font-size:.88rem;color:#5e6763;padding-left:18px;position:relative}
+.price-card li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:900}
+.pill{position:absolute;right:18px;top:18px;background:var(--sand);border-radius:999px;padding:5px 10px;font-size:.67rem;font-weight:900;color:#2a1e08}
+
+/* Supplier listings */
+.listing{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.listing:last-child{border-bottom:0}
+.badge{padding:5px 10px;border-radius:999px;background:#edf3ef;color:var(--green);font-size:.7rem;font-weight:800;white-space:nowrap}
+.listing h4{margin-bottom:2px;font-size:.98rem}
+.listing p{color:var(--muted);font-size:.82rem;margin:0}
+.listing .btn{padding:8px 14px;font-size:.78rem}
+
+/* CTA band */
+.cta-band{background:linear-gradient(135deg,#12352a,#1c4534);border-radius:28px;padding:50px;color:white;display:flex;justify-content:space-between;gap:32px;align-items:center}
+.cta-band h2{color:white;margin-bottom:10px;font-size:clamp(1.6rem,3vw,2.5rem);letter-spacing:-.03em}
+.cta-band p{opacity:.78;font-size:1rem;max-width:560px}
+
+/* FAQ */
+.faq{display:grid;gap:9px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px 18px;cursor:pointer}
+.faq summary{font-weight:800;color:var(--green);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq summary::after{content:"＋";font-size:1.1rem;color:var(--sand);flex-shrink:0;transition:.2s}
+.faq details[open] summary::after{content:"−"}
+.faq p{color:var(--muted);font-size:.92rem;margin-top:12px;line-height:1.6}
+
+/* Closed notice */
+.closed-banner{background:linear-gradient(135deg,#fffbf2,#fff8ec);border:1px solid #e8d49b;border-radius:20px;padding:28px 32px;display:flex;gap:20px;align-items:flex-start}
+.closed-icon{font-size:2rem;flex-shrink:0;line-height:1;margin-top:2px}
+.closed-content h3{font-size:1.05rem;color:#3b2d12;margin-bottom:8px;font-weight:800}
+.closed-content p{font-size:.9rem;color:#6b5632;line-height:1.6;max-width:680px}
+.closed-content a{color:var(--green);font-weight:700;text-decoration:underline}
+
+/* Footer */
+.footer{background:#0b241a;color:#dce6df;padding:56px 0 26px}
+.footer-grid{display:grid;grid-template-columns:1.5fr .8fr .8fr;gap:32px;margin-bottom:36px}
+.footer-brand{display:flex;align-items:center;gap:10px;font-weight:800;color:#fff;margin-bottom:14px}
+.footer-brand svg{width:36px;height:36px;flex-shrink:0}
+.footer-brand-text{letter-spacing:.08em;font-size:.84rem;line-height:1.1}
+.footer-brand-text small{display:block;color:#9fb0a7;font-weight:600;letter-spacing:.14em;font-size:.54rem;margin-top:2px}
+.footer p{color:#9fb0a7;font-size:.85rem;line-height:1.6;max-width:360px}
+.footer h4{color:white;margin-bottom:12px;font-size:.88rem;letter-spacing:.04em}
+.footer nav a{display:block;color:#9fb0a7;font-size:.86rem;margin-bottom:8px;transition:.15s color}
+.footer nav a:hover{color:#fff}
+.footer-bottom{display:flex;justify-content:space-between;gap:20px;border-top:1px solid rgba(255,255,255,.09);padding-top:20px;font-size:.74rem;color:#5e7068;flex-wrap:wrap}
+
+/* Scout output */
+#scoutOutput{margin-top:14px;border-radius:14px;padding:14px 16px;background:var(--sand-3);border:1px solid #e5d2b0;display:none;font-size:.88rem}
+#scoutOutput strong{color:var(--green)}
+
+/* Responsive */
+@media (max-width:980px){
+  .hero-grid,.two-col{grid-template-columns:1fr}
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .steps,.pricing{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .nav-links{display:none}
+  .hero{padding-top:52px}
+  .cta-band{flex-direction:column;align-items:flex-start}
+  .footer-grid{grid-template-columns:1fr}
+  .closed-banner{flex-direction:column;gap:12px}
+}
+@media (max-width:620px){
+  .grid-4,.form-grid{grid-template-columns:1fr}
+  .section{padding:68px 0}
+  .hero-card{padding:16px}
+  .footer-grid{grid-template-columns:1fr}
+  .listing{grid-template-columns:1fr}
+  .listing .btn{justify-self:start;margin-top:4px}
+  .footer-bottom{flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="40" height="40" rx="10" fill="#153D2E"/>
+        <path d="M8 28 L20 12 L32 28" stroke="#D4B883" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+        <path d="M8 22 L20 6 L32 22" stroke="white" stroke-width="2" stroke-linejoin="round" fill="none" opacity="0.5"/>
+        <rect x="16" y="22" width="8" height="8" rx="1.5" fill="#D4B883"/>
+      </svg>
+      <div class="brand-text">EVERGLADES<small>LUMBER EXCHANGE</small></div>
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#materials">Materials</a>
+      <a href="/directory.html">Directory</a>
+      <a href="#suppliers">Suppliers</a>
+      <a href="#pricing">Plans</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-primary" href="#quote">Get quotes</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="kicker">South Florida · Materials Marketplace</div>
+      <h1>Source materials without the supplier runaround.</h1>
+      <p class="hero-sub">Everglades Lumber Exchange turns a rough material list into a clean, supplier-ready quote request — then routes it to the right South Florida yards and distributors.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="#quote">Request material quotes</a>
+        <a class="btn btn-secondary btn-lg" href="#scout">Try Lumber Scout AI</a>
+      </div>
+      <div class="trust-row">
+        <span>✓ <b>No inventory held</b></span>
+        <span>✓ <b>Supplier-funded model</b></span>
+        <span>✓ <b>AI-assisted intake</b></span>
+      </div>
+
+      <!-- Closed business notice -->
+      <div class="alert-notice" style="margin-top:28px">
+        <div class="alert-icon">📍</div>
+        <p><strong>Looking for the old Everglades Lumber?</strong> That business has permanently closed. Everglades Lumber Exchange is a new independent sourcing marketplace connecting South Florida buyers with active local suppliers — no affiliation with any prior business at this address.</p>
+      </div>
+    </div>
+
+    <!-- Lumber Scout preview -->
+    <div class="hero-card" id="scout">
+      <div class="scout-label">THE LUMBER SCOUT</div>
+      <div class="scout-window">
+        <div class="scout-top">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <div class="scout-title">Quote preparation</div>
+        </div>
+        <div class="chat">
+          <div class="bubble bot">Tell me what you're building and what materials you need.</div>
+          <div class="bubble user">1,800 sq ft addition. Framing lumber, plywood, treated posts, and a deck.</div>
+          <div class="bubble bot">
+            <strong>Got it — I'll prep this for suppliers.</strong>
+            <div class="tag-row">
+              <span class="tag">Framing lumber</span>
+              <span class="tag">Plywood / OSB</span>
+              <span class="tag">Pressure treated</span>
+              <span class="tag">Decking</span>
+            </div>
+          </div>
+          <div class="scout-note"><strong>Next:</strong> ZIP code, quantities &amp; timing → matched suppliers receive a clean RFQ.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">The flywheel</div>
+      <h2>Make the hardest part of material buying the easiest part of the job.</h2>
+      <p class="section-lead">Asset-light by design — own the buyer demand and supplier workflow before touching product, freight or inventory risk.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Capture the job</h3>
+        <p>Submit a material list, paste a takeoff, or describe the project in plain English. Lumber Scout handles the rest.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Normalize with AI</h3>
+        <p>Lumber Scout groups your materials, flags missing dimensions or quantities, and builds a clean request suppliers can actually act on.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Compare &amp; build</h3>
+        <p>Relevant suppliers receive the request. You get quoted availability, delivery terms and pricing — apples-to-apples.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- STATS BAND -->
+<section class="section band">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Why this model</div>
+      <h2>Start as the marketplace. Add commerce only where the economics work.</h2>
+      <p class="section-lead">Lumber is bulky, volatile and local. A quote marketplace monetizes demand first — affiliate commerce comes later for higher-margin tools and accessories.</p>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <strong>0</strong>
+        <span>pallets to own at launch</span>
+      </div>
+      <div class="stat">
+        <strong>1</strong>
+        <span>intake form drives the whole funnel</span>
+      </div>
+      <div class="stat">
+        <strong>3</strong>
+        <span>initial revenue channels to validate</span>
+      </div>
+      <div class="stat">
+        <strong>24/7</strong>
+        <span>AI intake qualifies requests</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- MATERIAL CATEGORIES -->
+<section class="section" id="materials">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Demand categories</div>
+      <h2>Everything a South Florida build actually needs.</h2>
+      <p class="section-lead">Broad catalog, focused monetization — high-intent quote requests and supplier relationships first.</p>
+    </div>
+    <div class="grid-4">
+      <div class="card">
+        <div class="card-icon">01</div>
+        <h3>Framing &amp; Lumber</h3>
+        <p>Dimensional lumber, treated stock, posts, beams and specialty timber.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">02</div>
+        <h3>Plywood &amp; Panels</h3>
+        <p>CDX, OSB, MDF, marine, cabinet-grade and specialty sheet goods.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">03</div>
+        <h3>Decking &amp; Fencing</h3>
+        <p>Composite, wood, posts, rail systems and installation hardware.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">04</div>
+        <h3>Build Accessories</h3>
+        <p>Fasteners, connectors, adhesives, concrete, rebar and jobsite supplies.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FORMS: QUOTE + LUMBER SCOUT -->
+<section class="section-tight" id="quote" style="background:linear-gradient(180deg,#f5f6f0,#f0f1eb)">
+  <div class="container">
+    <div class="section-head" style="margin-bottom:28px">
+      <div class="eyebrow">Start here</div>
+      <h2 style="color:var(--green)">Request material quotes</h2>
+    </div>
+    <div class="two-col">
+
+      <!-- Quote request form -->
+      <div class="panel">
+        <div class="eyebrow">Buyer intake</div>
+        <h2 style="font-size:1.5rem">Submit a quote request</h2>
+        <p class="section-lead" style="font-size:.93rem;margin-bottom:20px">Tell us enough to match your request. No commitment or checkout required.</p>
+
+        <form action="https://formsubmit.co/hello@evergladeslumber.com" method="POST">
+          <input type="hidden" name="_subject" value="New ELX Quote Request">
+          <input type="hidden" name="_next" value="https://evergladeslumber.com/thank-you.html">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+
+          <div class="form-grid">
+            <div class="field">
+              <label>Your role</label>
+              <select name="role">
+                <option>Contractor</option>
+                <option>Builder / Developer</option>
+                <option>Homeowner</option>
+                <option>Architect / Designer</option>
+                <option>Procurement</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>ZIP code</label>
+              <input name="zip" required placeholder="33101">
+            </div>
+            <div class="field">
+              <label>Project type</label>
+              <select name="project_type">
+                <option>New construction</option>
+                <option>Remodel / addition</option>
+                <option>Deck / outdoor</option>
+                <option>Fence / gate</option>
+                <option>Cabinet / millwork</option>
+                <option>Commercial</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>When do you need it?</label>
+              <select name="urgency">
+                <option value="today">Today / ASAP</option>
+                <option value="this-week">This week</option>
+                <option>1–2 weeks</option>
+                <option>2–4 weeks</option>
+                <option>Planning stage</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label>Material list</label>
+              <textarea name="materials" required placeholder="Example: 2×4×8 SPF #2 — 220 pcs; 7/16 OSB — 80 sheets; 4×4 treated posts — 24 pcs; composite deck boards — 700 sq ft"></textarea>
+            </div>
+            <div class="field full">
+              <label>Email</label>
+              <input type="email" name="email" required placeholder="you@company.com">
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit" style="width:100%;margin-top:4px">Send quote request →</button>
+          <p class="form-note" style="margin-top:10px">Your contact is shared with matched suppliers only. No spam.</p>
+        </form>
+      </div>
+
+      <!-- Lumber Scout live tool -->
+      <div class="panel" style="background:#fbfaf6">
+        <div class="eyebrow">AI qualification</div>
+        <h2 style="font-size:1.5rem">Try Lumber Scout first</h2>
+        <p class="section-lead" style="font-size:.93rem;margin-bottom:20px">Paste your list and Lumber Scout will normalize it, flag gaps, and prep a clean RFQ before it goes to suppliers.</p>
+
+        <form id="scoutForm">
+          <div class="form-grid">
+            <div class="field">
+              <label>Role</label>
+              <select name="role">
+                <option>Contractor</option>
+                <option>Builder</option>
+                <option>Homeowner</option>
+                <option>Procurement</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>ZIP</label>
+              <input name="zip" placeholder="33101">
+            </div>
+            <div class="field full">
+              <label>Project description</label>
+              <input name="project" placeholder="2,000 sq ft home addition">
+            </div>
+            <div class="field full">
+              <label>Materials needed</label>
+              <textarea name="materials" placeholder="Paste a list, estimate, notes or rough quantities"></textarea>
+            </div>
+            <div class="field full">
+              <label>Urgency</label>
+              <select name="urgency">
+                <option value="today">Today / ASAP</option>
+                <option value="this-week">This week</option>
+                <option>1–2 weeks</option>
+                <option>Planning</option>
+              </select>
+            </div>
+          </div>
+          <button id="scoutSubmit" class="btn btn-sand" type="submit" style="width:100%">Run Lumber Scout →</button>
+        </form>
+        <div id="scoutOutput"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- SUPPLIER SECTION -->
+<section class="section" id="suppliers">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Supplier side</div>
+      <h2>Turn empty sales hours into qualified RFQs.</h2>
+      <p class="section-lead">Only talk to buyers who have a real project and a defined material list. Founding suppliers get free listing and first lead credits in exchange for responsiveness data.</p>
+    </div>
+    <div class="two-col">
+      <div class="panel">
+        <h3 style="color:var(--green);font-size:1.2rem;margin-bottom:16px">Launch supplier offer</h3>
+        <p style="color:var(--muted);font-size:.93rem;margin-bottom:20px">Founding Partner: free 30-day listing + first lead credits in exchange for service-area details and responsiveness. No risk, no setup fee.</p>
+        <a class="btn btn-primary" href="/suppliers.html">Join the supplier network →</a>
+      </div>
+      <div class="panel">
+        <h3 style="color:var(--green);font-size:1.2rem;margin-bottom:4px">Directory mechanics</h3>
+        <div class="listing">
+          <span class="badge">Public</span>
+          <div><h4>Supplier profile</h4><p>Service area · categories · delivery · website · phone</p></div>
+          <a class="btn btn-secondary" href="/directory.html">View</a>
+        </div>
+        <div class="listing">
+          <span class="badge">Lead</span>
+          <div><h4>Qualified RFQ</h4><p>Buyer need · quantity · ZIP · urgency · contact</p></div>
+          <a class="btn btn-secondary" href="#quote">Example</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PRICING -->
+<section class="section" id="pricing" style="background:linear-gradient(180deg,#f5f6f0,#f0f1eb)">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Revenue architecture</div>
+      <h2>Three monetization layers, one core audience.</h2>
+      <p class="section-lead">Launch targets to validate — not claims about market-standard pricing.</p>
+    </div>
+    <div class="pricing">
+      <div class="price-card">
+        <small>Supplier Starter</small>
+        <div class="price">$0</div>
+        <p>Free listing to seed the network during launch.</p>
+        <ul>
+          <li>Public business profile</li>
+          <li>Service area + categories</li>
+          <li>Claim / update request</li>
+        </ul>
+        <a class="btn btn-secondary" href="/suppliers.html">Apply for listing</a>
+      </div>
+      <div class="price-card featured">
+        <div class="pill">CORE</div>
+        <small>Supplier Pro</small>
+        <div class="price">$149<span>/mo target</span></div>
+        <p>Visibility + qualified lead access for active territories.</p>
+        <ul>
+          <li>Priority directory placement</li>
+          <li>Qualified RFQ alerts</li>
+          <li>Lead dashboard + response tracking</li>
+          <li>Featured category placement</li>
+        </ul>
+        <a class="btn btn-primary" href="/suppliers.html">Become a founding partner</a>
+      </div>
+      <div class="price-card">
+        <small>Commerce / Affiliate</small>
+        <div class="price">Variable</div>
+        <p>Higher-margin product links after traffic baseline established.</p>
+        <ul>
+          <li>Tools &amp; hardware</li>
+          <li>Fasteners &amp; accessories</li>
+          <li>DIY bundles / project kits</li>
+        </ul>
+        <a class="btn btn-secondary" href="#faq">See strategy</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA BAND -->
+<section class="section-tight">
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <h2>Own the demand before you own the inventory.</h2>
+        <p>One intake form. One AI qualification step. One supplier network to seed. The funnel proves itself before a cent goes into logistics.</p>
+      </div>
+      <a class="btn btn-sand btn-lg" href="#quote">Launch the quote funnel →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">FAQ</div>
+      <h2>Designed to launch lean.</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>Is this the same as the old Everglades Lumber?</summary>
+        <p>No. The business previously known as Everglades Lumber has permanently closed. Everglades Lumber Exchange (ELX) is a new, independently operated materials sourcing marketplace with no affiliation to any prior business operating under a similar name.</p>
+      </details>
+      <details>
+        <summary>Why not sell or dropship lumber directly?</summary>
+        <p>Large-format construction materials carry freight complexity, local-stock volatility and significant damage risk in transit. The first version monetizes the lead and routing layer instead. Commerce can be layered on for smaller, higher-margin products once demand is proven.</p>
+      </details>
+      <details>
+        <summary>What does Lumber Scout actually do?</summary>
+        <p>Lumber Scout normalizes a plain-English material request into a structured, supplier-ready RFQ. It groups materials into product families, flags missing dimensions or quantities, captures ZIP and urgency, and passes a clean request to matched local suppliers.</p>
+      </details>
+      <details>
+        <summary>How do suppliers get matched to my request?</summary>
+        <p>The matching layer uses territory, material categories, delivery radius, minimum order and response SLA to route each request to the right supplier set. As the supplier registry grows, the matches get tighter and faster.</p>
+      </details>
+      <details>
+        <summary>Can this expand beyond South Florida?</summary>
+        <p>Yes. The Everglades positioning gives the launch a geographic story, but the software layer can support additional metro directories over time. South Florida is the density-first market.</p>
+      </details>
+      <details>
+        <summary>What does it cost buyers to use ELX?</summary>
+        <p>Nothing. Buyers submit quote requests for free. The marketplace is supplier-funded through lead fees and directory placements.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="40" height="40" rx="10" fill="#1a4d38"/>
+            <path d="M8 28 L20 12 L32 28" stroke="#D4B883" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+            <path d="M8 22 L20 6 L32 22" stroke="white" stroke-width="2" stroke-linejoin="round" fill="none" opacity="0.4"/>
+            <rect x="16" y="22" width="8" height="8" rx="1.5" fill="#D4B883"/>
+          </svg>
+          <div class="footer-brand-text">EVERGLADES<small>LUMBER EXCHANGE</small></div>
+        </div>
+        <p>Independent materials sourcing marketplace connecting South Florida buyers with lumber yards and building material suppliers. Not affiliated with any prior business.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <nav>
+          <a href="#how">How it works</a>
+          <a href="#materials">Materials</a>
+          <a href="/directory.html">Supplier directory</a>
+          <a href="/suppliers.html">Supplier network</a>
+        </nav>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <nav>
+          <a href="/privacy.html">Privacy policy</a>
+          <a href="/terms.html">Terms of service</a>
+          <a href="mailto:hello@evergladeslumber.com">hello@evergladeslumber.com</a>
+        </nav>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Everglades Lumber Exchange · Independent marketplace · Not affiliated with any prior lumber business</span>
+      <span>Miami-Dade · Broward · Palm Beach · South Florida</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Lumber Scout client-side AI
+const scoutForm = document.querySelector('#scoutForm');
+const scoutOutput = document.querySelector('#scoutOutput');
+const scoutSubmit = document.querySelector('#scoutSubmit');
+
+function localScout({ role, zip, project, urgency, materials }) {
+  const text = `${project || ''} ${materials || ''}`.toLowerCase();
+  const tags = [];
+  const add = (needle, label) => { if (text.includes(needle) && !tags.includes(label)) tags.push(label); };
+  add('plywood','Plywood / Panels');
+  add('osb','OSB / Sheathing');
+  add('2x','Dimensional Lumber');
+  add('treated','Pressure-Treated Lumber');
+  add('deck','Decking');
+  add('fence','Fencing');
+  add('rebar','Rebar');
+  add('concrete','Concrete / Masonry');
+  add('door','Doors / Millwork');
+  add('hardwood','Hardwood');
+  add('cabinet','Cabinet-Grade Materials');
+  add('insulation','Insulation');
+  add('drywall','Drywall');
+  if (!tags.length) tags.push('General Building Materials');
+  const intent = urgency === 'today' ? 'same-day / local-stock suppliers'
+    : urgency === 'this-week' ? 'fast-turn suppliers'
+    : 'competitive-quote suppliers';
+  return {
+    summary: `${role || 'Buyer'} in ${zip || 'South Florida'}: ${project || 'building project'}. Best matched with ${intent}.`,
+    tags,
+    next: 'Submit the quote form below and this normalized request gets routed to matched suppliers.'
+  };
+}
+
+function escape(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
+
+if (scoutForm) {
+  scoutForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(scoutForm).entries());
+    scoutSubmit.disabled = true;
+    scoutSubmit.textContent = 'Scout is working…';
+    scoutOutput.style.display = 'block';
+    scoutOutput.innerHTML = '<strong>Normalizing your request…</strong>';
+    await new Promise(r => setTimeout(r, 900));
+    const result = localScout(data);
+    scoutOutput.innerHTML = `
+      <strong>${escape(result.summary)}</strong>
+      <div class="tag-row" style="margin-top:8px">${result.tags.map(t => `<span class="tag">${escape(t)}</span>`).join('')}</div>
+      <p style="margin:10px 0 0;color:#65706a;font-size:.84rem">→ ${escape(result.next)}</p>
+    `;
+    scoutSubmit.disabled = false;
+    scoutSubmit.textContent = 'Run Lumber Scout →';
+  });
+}
+</script>
+
+</body>
+</html>

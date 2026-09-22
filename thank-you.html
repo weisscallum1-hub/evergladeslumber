@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Request Received | Everglades Lumber Exchange</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<style>
+:root{--green:#153D2E;--sand:#D4B883;--ink:#202622;--muted:#68716d;--paper:#F8F7F2;--line:#dde2dd}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,ui-sans-serif,system-ui,sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center}
+.card{background:#fff;border:1px solid var(--line);border-radius:28px;padding:52px 44px;max-width:540px;width:100%;box-shadow:0 20px 60px rgba(20,38,30,.10)}
+.check{width:68px;height:68px;border-radius:50%;background:#eaf3eb;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:2rem}
+h1{font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.05;letter-spacing:-.05em;color:var(--green);margin-bottom:14px}
+p{color:var(--muted);font-size:1rem;line-height:1.65;margin-bottom:10px}
+.next-steps{background:#f7f8f5;border-radius:16px;padding:20px 22px;text-align:left;margin:26px 0}
+.next-steps h3{color:var(--green);font-size:.92rem;margin-bottom:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:900}
+.step{display:flex;gap:12px;margin-bottom:10px;font-size:.88rem;color:#55605a}
+.step-num{width:22px;height:22px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:900;flex-shrink:0;margin-top:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;padding:13px 22px;font-weight:800;font-size:.9rem;cursor:pointer;transition:.18s all;font-family:inherit;text-decoration:none}
+.btn-primary{background:var(--green);color:#fff;box-shadow:0 8px 22px rgba(21,61,46,.20)}
+.btn-secondary{background:#fff;color:var(--green);border:1.5px solid var(--line);margin-left:10px}
+.brand{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:28px;color:var(--muted);font-size:.8rem;text-decoration:none}
+.brand svg{width:24px;height:24px}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="check">✓</div>
+  <h1>Request received.</h1>
+  <p>Your quote request has been submitted to the Everglades Lumber Exchange team. We'll review it and match it with relevant South Florida suppliers.</p>
+
+  <div class="next-steps">
+    <h3>What happens next</h3>
+    <div class="step">
+      <div class="step-num">1</div>
+      <span>Your request is reviewed and normalized by Lumber Scout to ensure it's supplier-ready.</span>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <span>It's routed to matched suppliers in your area and material categories.</span>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <span>You'll hear back via the email you provided as quotes come in — typically within 1–2 business days.</span>
+    </div>
+  </div>
+
+  <p style="font-size:.88rem;margin-bottom:22px">Questions? Email <a href="mailto:hello@evergladeslumber.com" style="color:var(--green);font-weight:700">hello@evergladeslumber.com</a></p>
+
+  <a class="btn btn-primary" href="/">Back to marketplace</a>
+  <a class="btn btn-secondary" href="/directory.html">Browse directory</a>
+
+  <a class="brand" href="/">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="6" fill="#153D2E"/>
+      <path d="M5 17 L12 7 L19 17" stroke="#D4B883" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+      <rect x="10" y="13" width="4" height="4" rx="1" fill="#D4B883"/>
+    </svg>
+    Everglades Lumber Exchange
+  </a>
+</div>
+</body>
+</html>
