@@ -6,7 +6,7 @@
 <title>Join the Supplier Network | Everglades Lumber Exchange</title>
 <meta name="description" content="Register supplier interest with Everglades Lumber Exchange. Share your South Florida service area and building-material categories while the network is being validated.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://evergladeslumber.com/suppliers.html">
+<link rel="canonical" href="https://evergladeslumber.com/suppliers">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <style>
 :root{--green:#153D2E;--green-2:#0c2c22;--sand:#D4B883;--sand-2:#EFE4D0;--sand-3:#f7f0e4;--ink:#202622;--muted:#68716d;--paper:#F8F7F2;--white:#fff;--line:#dde2dd;--shadow:0 12px 40px rgba(20,38,30,.09);--radius:20px;--max:1080px}
@@ -87,7 +87,7 @@ textarea{min-height:90px;resize:vertical}
       <p>ELX is validating supplier interest and product coverage. An application helps us understand what you offer; it does not guarantee a listing, exclusive territory, RFQs or sales.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#apply">Apply to join →</a>
-        <a class="btn btn-secondary" href="/directory.html">View directory</a>
+        <a class="btn btn-secondary" href="/directory">View directory</a>
       </div>
     </div>
   </section>
@@ -138,48 +138,49 @@ textarea{min-height:90px;resize:vertical}
 
           <form action="https://formsubmit.co/hello@evergladeslumber.com" method="POST">
             <input type="hidden" name="_subject" value="New ELX Supplier Application">
-            <input type="hidden" name="_next" value="https://evergladeslumber.com/supplier-thank-you.html">
+            <input type="hidden" name="_next" value="https://evergladeslumber.com/supplier-thank-you">
             <input type="hidden" name="_template" value="table">
             <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px" value="">
 
             <div class="form-grid">
               <div class="field">
-                <label>Company name</label>
-                <input name="company" required placeholder="South Florida Lumber Co.">
+                <label for="supplier-company">Company name</label>
+                <input id="supplier-company" name="company" autocomplete="organization" required placeholder="South Florida Lumber Co.">
               </div>
               <div class="field">
-                <label>Contact name</label>
-                <input name="contact" required placeholder="Your name">
+                <label for="supplier-contact">Contact name</label>
+                <input id="supplier-contact" name="contact" autocomplete="name" required placeholder="Your name">
               </div>
               <div class="field">
-                <label>Email address</label>
-                <input name="email" type="email" required placeholder="you@company.com">
+                <label for="supplier-email">Email address</label>
+                <input id="supplier-email" name="email" type="email" autocomplete="email" required placeholder="you@company.com">
               </div>
               <div class="field">
-                <label>Phone</label>
-                <input name="phone" type="tel" placeholder="(305) 555-0100">
+                <label for="supplier-phone">Phone</label>
+                <input id="supplier-phone" name="phone" type="tel" autocomplete="tel" placeholder="(305) 555-0100">
               </div>
               <div class="field">
-                <label>Primary city / ZIP</label>
-                <input name="location" required placeholder="Miami, FL 33101">
+                <label for="supplier-location">Primary city / ZIP</label>
+                <input id="supplier-location" name="location" autocomplete="address-level2" required placeholder="Miami, FL 33101">
               </div>
               <div class="field">
-                <label>Service radius</label>
-                <input name="radius" placeholder="e.g. 30 miles">
+                <label for="supplier-radius">Service radius</label>
+                <input id="supplier-radius" name="radius" placeholder="e.g. 30 miles">
               </div>
               <div class="field full">
-                <label>Material categories you supply</label>
-                <input name="categories" required placeholder="Framing lumber, plywood, decking, fasteners…">
+                <label for="supplier-categories">Material categories you supply</label>
+                <input id="supplier-categories" name="categories" required placeholder="Framing lumber, plywood, decking, fasteners…">
               </div>
               <div class="field full">
-                <label>Website</label>
-                <input name="website" type="url" placeholder="https://yourcompany.com">
+                <label for="supplier-website">Website</label>
+                <input id="supplier-website" name="website" type="url" autocomplete="url" placeholder="https://yourcompany.com">
               </div>
               <div class="field full">
-                <label>Anything else? (delivery, minimums, trade accounts, specialties)</label>
-                <textarea name="notes" placeholder="Delivery radius, trade account requirements, specialty items, minimum order size, etc."></textarea>
+                <label for="supplier-notes">Anything else? (delivery, minimums, trade accounts, specialties)</label>
+                <textarea id="supplier-notes" name="notes" placeholder="Delivery radius, trade account requirements, specialty items, minimum order size, etc."></textarea>
               </div>
             </div>
+            <label class="form-note"><input type="checkbox" name="contact_consent" value="yes" required> I agree ELX may contact me about my supplier application.</label>
             <button class="btn btn-primary" type="submit" style="width:100%;margin-top:4px">Apply as founding supplier →</button>
             <p class="form-note" style="margin-top:10px">Submitted information is used to review your application. Any public supplier profile requires your approval. This form does not create a binding agreement.</p>
           </form>
@@ -194,9 +195,9 @@ textarea{min-height:90px;resize:vertical}
     <span>© 2026 Everglades Lumber Exchange · Independent marketplace</span>
     <div style="display:flex;gap:20px">
       <a href="/">Home</a>
-      <a href="/directory.html">Directory</a>
-      <a href="/privacy.html">Privacy</a>
-      <a href="/terms.html">Terms</a>
+      <a href="/directory">Directory</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
     </div>
   </div>
 </footer>

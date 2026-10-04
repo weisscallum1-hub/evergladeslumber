@@ -7,25 +7,25 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://evergladeslumber.com/directory.html</loc>
+    <loc>https://evergladeslumber.com/directory</loc>
     <lastmod>2026-10-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://evergladeslumber.com/suppliers.html</loc>
+    <loc>https://evergladeslumber.com/suppliers</loc>
     <lastmod>2026-10-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://evergladeslumber.com/privacy.html</loc>
+    <loc>https://evergladeslumber.com/privacy</loc>
     <lastmod>2026-10-04</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://evergladeslumber.com/terms.html</loc>
+    <loc>https://evergladeslumber.com/terms</loc>
     <lastmod>2026-10-04</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>

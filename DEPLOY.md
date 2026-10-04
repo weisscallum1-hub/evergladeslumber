@@ -5,7 +5,7 @@ The production service is the Cloudflare Worker `evergladeslumber`, connected to
 ## Publish through the connected GitHub build
 
 1. In Cloudflare, open **Workers & Pages → evergladeslumber → Settings → Builds**. Confirm the connected repository, production branch, and root directory (repository root). Use no build command and `npx wrangler deploy` as the deploy command.
-2. In **Settings → Variables and Secrets**, add `GROQ_API_KEY` as an encrypted runtime secret for Production. Optionally set `GROQ_MODEL`; the default is `openai/gpt-oss-20b`.
+2. In **Settings → Bindings**, add `GROQ_API_KEY` as an encrypted Secret for the Production Worker, then save/deploy. Optionally set `GROQ_MODEL`; the default is `openai/gpt-oss-20b`.
 3. Commit and push reviewed changes to the configured production branch. Cloudflare's connected build should publish the Worker and its assets together. Review the build result before treating the update as live.
 
 The static upload panel only accepts static assets; it cannot deploy the `/api/scout` Worker handler. Do not use `wrangler pages deploy` for this Worker.
