@@ -1,84 +1,47 @@
-# Everglades Lumber Exchange — Deployment Guide
+# Everglades Lumber Exchange — Cloudflare Worker
 
-## Quick deploy (Cloudflare Pages)
+The production service is the Cloudflare Worker `evergladeslumber`, connected to the GitHub repository `weisscallum1-hub/evergladeslumber`. Deploy from the repository root so Wrangler reads `wrangler.jsonc`, publishes `Site/` as static assets, and runs `worker.js` for `/api/scout`.
 
-### 1. Push to GitHub
-```bash
-git init
-git add .
-git commit -m "Initial build — Everglades Lumber Exchange"
-git remote add origin https://github.com/YOUR_USERNAME/evergladeslumber.git
-git push -u origin main
-```
+## Publish through the connected GitHub build
 
-### 2. Connect to Cloudflare Pages
-- Log in to dash.cloudflare.com → Pages → Create a project
-- Connect to your GitHub repo
-- **Build settings:**
-  - Framework preset: None
-  - Build command: _(leave blank)_
-  - Build output directory: `/` (root — all files are already in the root)
-- Click Save and Deploy
+1. In Cloudflare, open **Workers & Pages → evergladeslumber → Settings → Builds**. Confirm the connected repository, production branch, and root directory (repository root). Use no build command and `npx wrangler deploy` as the deploy command.
+2. In **Settings → Variables and Secrets**, add `GROQ_API_KEY` as an encrypted runtime secret for Production. Optionally set `GROQ_MODEL`; the default is `openai/gpt-oss-20b`.
+3. Commit and push reviewed changes to the configured production branch. Cloudflare's connected build should publish the Worker and its assets together. Review the build result before treating the update as live.
 
-### 3. Connect the domain
-- In Cloudflare Pages → Custom domains → Add evergladeslumber.com
-- If DNS is already on Cloudflare: automatic
-- If not: point evergladeslumber.com's nameservers to Cloudflare first
+The static upload panel only accepts static assets; it cannot deploy the `/api/scout` Worker handler. Do not use `wrangler pages deploy` for this Worker.
 
-### 4. Set up email routing (Cloudflare Email Routing)
-- Cloudflare dashboard → Email → Email Routing → Enable
-- Add route: `hello@evergladeslumber.com` → forwards to `weisscallum1@gmail.com`
-- This activates FormSubmit delivery to hello@ which then hits your Gmail
+## Local deployment alternative
 
-### 5. Activate FormSubmit
-FormSubmit requires a one-time email confirmation per recipient address.
-- Deploy the site first
-- Submit a test quote request via the form on the live site
-- Check weisscallum1@gmail.com for a FormSubmit confirmation email
-- Click confirm — forms are now live
+From the repository root, run `npx wrangler deploy`. This publishes to the Worker name in `wrangler.jsonc`. The command is a production deployment; check the Cloudflare account and Worker name before running it. Do not run it while a GitHub production build is in progress.
 
-### 6. Submit to Google Search Console
-- https://search.google.com/search-console
-- Add property: evergladeslumber.com
-- Verify via DNS TXT record (Cloudflare makes this easy)
-- Submit sitemap: https://evergladeslumber.com/sitemap.xml
+## Lumber Scout secret and limits
 
----
+The API key is read only by the Worker at runtime. Never put it in `Site/` or browser JavaScript. A provider key was previously present in published browser code; revoke that old credential in the provider console and use only a replacement saved as the encrypted Cloudflare secret.
 
-## SEO notes
-- The "formerly searched for Everglades Lumber?" notice on the homepage is strategic:
-  people searching the old closed business will land here, see the callout,
-  and understand the new offering immediately.
-- Directory page (/directory.html) is built for local SEO with keyword-rich
-  category descriptions for Miami-Dade and Broward.
-- Sitemap is pre-built at /sitemap.xml
+Without `GROQ_API_KEY`, Lumber Scout falls back to local keyword-based drafting. It does not verify inventory, pricing, specifications, code compliance, or supplier capability.
 
-## File structure
-```
-/
-├── index.html          ← Homepage (main SEO landing)
-├── directory.html      ← Supplier directory (local SEO)
-├── suppliers.html      ← Supplier application
-├── thank-you.html      ← Form confirmation (noindex)
-├── privacy.html        ← Privacy policy (noindex)
-├── terms.html          ← Terms of service (noindex)
-├── robots.txt
-├── sitemap.xml
-├── _headers            ← Cloudflare Pages security headers
-├── _redirects          ← Cloudflare Pages clean URLs
-└── assets/
-    └── favicon.svg
-```
+## Forms and search
 
-## Forms
-Both forms use FormSubmit (free, no account needed):
-- Quote request → hello@evergladeslumber.com (subject: "New ELX Quote Request")
-- Supplier application → hello@evergladeslumber.com (subject: "New ELX Supplier Application")
-- Both redirect to /thank-you.html on success
+Buyer quote and supplier application forms use FormSubmit to deliver to `hello@evergladeslumber.com`. Confirm mailbox routing and FormSubmit's one-time recipient confirmation. A thank-you page alone does not confirm email delivery.
 
-## Next steps after launch
-1. Personally email 5–10 South Florida lumber yards with the founding partner offer
-2. Add them as featured listings in directory.html
-3. Submit to Google Business (as a marketplace, not a physical store)
-4. Post in South Florida contractor Facebook groups / Reddit (r/Homebuilding)
-5. Once 10+ supplier listings are live, start pushing the buyer-side via contractor forums
+Add `evergladeslumber.com` to Google Search Console, verify domain ownership, and submit `https://evergladeslumber.com/sitemap.xml`.
+
+## Site contents
+
+- `Site/index.html` — marketplace home and buyer intake
+- `Site/directory.html` — dated supplier research shortlist, not endorsements or confirmed partners
+- `Site/suppliers.html` — supplier application
+- `Site/thank-you.html` and `Site/supplier-thank-you.html` — form confirmations
+- `Site/privacy.html` and `Site/terms.html` — service disclosures
+- `Site/_headers`, `Site/_redirects`, `Site/robots.txt`, `Site/sitemap.xml`
+- `Site/assets/` — ELX mark and favicon
+- `worker.js` — Worker API routing and static asset delivery
+- `functions/api/scout.js` — request validation and Lumber Scout handler
+
+## Operating workflow
+
+1. Review each buyer request manually; clarify size, grade/species, treatment/use class, quantity, ZIP, schedule, substitutions, and delivery access.
+2. Research suppliers for the exact material and service area. Confirm business identity, current stock, price validity, order minimum, delivery, lead time, and product documentation directly.
+3. Get the buyer's approval before sharing their contact details or RFQ with a supplier.
+4. Record quotes with date/time, expiration, quoted specifications, freight/tax treatment, and supplier contact. Compare like for like and state exclusions.
+5. Keep supplier directory facts dated and distinguish researched listings from partners or paid placements.

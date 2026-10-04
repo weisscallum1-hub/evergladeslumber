@@ -16,7 +16,6 @@
 <meta property="og:url" content="https://evergladeslumber.com/">
 <meta property="og:title" content="Everglades Lumber Exchange | South Florida Materials Sourcing">
 <meta property="og:description" content="Turn a rough material list into a supplier-ready quote request. Independent sourcing marketplace for South Florida contractors and builders.">
-<meta property="og:image" content="https://evergladeslumber.com/assets/og-image.png">
 
 <!-- Schema -->
 <script type="application/ld+json">
@@ -78,7 +77,7 @@ img{display:block;max-width:100%}
 .nav{position:sticky;top:0;z-index:30;background:rgba(248,247,242,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(21,61,46,.08)}
 .nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .brand{display:flex;align-items:center;gap:11px;font-weight:800;color:var(--green)}
-.brand svg{width:40px;height:40px;flex-shrink:0}
+.brand img{width:40px;height:40px;flex-shrink:0}
 .brand-text{letter-spacing:.08em;font-size:.87rem;line-height:1.1}
 .brand-text small{display:block;color:var(--muted);font-weight:600;letter-spacing:.14em;font-size:.56rem;margin-top:2px}
 .nav-links{display:flex;gap:24px;align-items:center;font-size:.92rem;color:#47514c}
@@ -225,7 +224,7 @@ textarea{min-height:130px;resize:vertical}
 .footer{background:#0b241a;color:#dce6df;padding:56px 0 26px}
 .footer-grid{display:grid;grid-template-columns:1.5fr .8fr .8fr;gap:32px;margin-bottom:36px}
 .footer-brand{display:flex;align-items:center;gap:10px;font-weight:800;color:#fff;margin-bottom:14px}
-.footer-brand svg{width:36px;height:36px;flex-shrink:0}
+.footer-brand img{width:36px;height:36px;flex-shrink:0}
 .footer-brand-text{letter-spacing:.08em;font-size:.84rem;line-height:1.1}
 .footer-brand-text small{display:block;color:#9fb0a7;font-weight:600;letter-spacing:.14em;font-size:.54rem;margin-top:2px}
 .footer p{color:#9fb0a7;font-size:.85rem;line-height:1.6;max-width:360px}
@@ -267,12 +266,7 @@ textarea{min-height:130px;resize:vertical}
 <header class="nav">
   <div class="container nav-inner">
     <a class="brand" href="#top">
-      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="40" height="40" rx="10" fill="#153D2E"/>
-        <path d="M8 28 L20 12 L32 28" stroke="#D4B883" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
-        <path d="M8 22 L20 6 L32 22" stroke="white" stroke-width="2" stroke-linejoin="round" fill="none" opacity="0.5"/>
-        <rect x="16" y="22" width="8" height="8" rx="1.5" fill="#D4B883"/>
-      </svg>
+      <img src="/assets/elx-mark.svg" alt="" width="40" height="40">
       <div class="brand-text">EVERGLADES<small>LUMBER EXCHANGE</small></div>
     </a>
     <nav class="nav-links">
@@ -309,7 +303,7 @@ textarea{min-height:130px;resize:vertical}
       <!-- Closed business notice -->
       <div class="alert-notice" style="margin-top:28px">
         <div class="alert-icon">📍</div>
-        <p><strong>Looking for the old Everglades Lumber?</strong> That business has permanently closed. Everglades Lumber Exchange is a new independent sourcing marketplace connecting South Florida buyers with active local suppliers — no affiliation with any prior business at this address.</p>
+        <p><strong>Independent sourcing marketplace.</strong> Everglades Lumber Exchange (ELX) connects buyers with building-material suppliers. ELX is not affiliated with lumber yards or suppliers that use a similar name. Supplier availability, pricing and service areas are confirmed directly for each request.</p>
       </div>
     </div>
 
@@ -333,7 +327,7 @@ textarea{min-height:130px;resize:vertical}
               <span class="tag">Decking</span>
             </div>
           </div>
-          <div class="scout-note"><strong>Next:</strong> ZIP code, quantities &amp; timing → matched suppliers receive a clean RFQ.</div>
+          <div class="scout-note"><strong>Next:</strong> Add quantities, specifications, ZIP code and timing. ELX reviews possible supplier matches with you.</div>
         </div>
       </div>
     </div>
@@ -363,7 +357,7 @@ textarea{min-height:130px;resize:vertical}
       <div class="step">
         <div class="num">3</div>
         <h3>Compare &amp; build</h3>
-        <p>Relevant suppliers receive the request. You get quoted availability, delivery terms and pricing — apples-to-apples.</p>
+        <p>ELX helps identify possible supplier matches. With your approval, we share the request and collect current pricing, availability and delivery terms from each supplier.</p>
       </div>
     </div>
   </div>
@@ -393,7 +387,7 @@ textarea{min-height:130px;resize:vertical}
       </div>
       <div class="stat">
         <strong>24/7</strong>
-        <span>AI intake qualifies requests</span>
+        <span>Self-service intake stays open around the clock</span>
       </div>
     </div>
   </div>
@@ -447,13 +441,13 @@ textarea{min-height:130px;resize:vertical}
       <div class="panel">
         <div class="eyebrow">Buyer intake</div>
         <h2 style="font-size:1.5rem">Submit a quote request</h2>
-        <p class="section-lead" style="font-size:.93rem;margin-bottom:20px">Tell us enough to match your request. No commitment or checkout required.</p>
+        <p class="section-lead" style="font-size:.93rem;margin-bottom:20px">ELX is launching in South Florida. Requests outside the region are reviewed manually and a supplier match is not guaranteed.</p>
 
         <form action="https://formsubmit.co/hello@evergladeslumber.com" method="POST">
           <input type="hidden" name="_subject" value="New ELX Quote Request">
           <input type="hidden" name="_next" value="https://evergladeslumber.com/thank-you.html">
-          <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-10000px" value="">
 
           <div class="form-grid">
             <div class="field">
@@ -468,7 +462,7 @@ textarea{min-height:130px;resize:vertical}
             </div>
             <div class="field">
               <label>ZIP code</label>
-              <input name="zip" required placeholder="33101">
+              <input name="zip" required placeholder="33101" inputmode="numeric" autocomplete="postal-code" pattern="^[0-9]{5}(-[0-9]{4})?$" maxlength="10" title="Enter a 5-digit US ZIP code or ZIP+4, such as 33101 or 33101-1234">
             </div>
             <div class="field">
               <label>Project type</label>
@@ -502,7 +496,7 @@ textarea{min-height:130px;resize:vertical}
             </div>
           </div>
           <button class="btn btn-primary" type="submit" style="width:100%;margin-top:4px">Send quote request →</button>
-          <p class="form-note" style="margin-top:10px">Your contact is shared with matched suppliers only. No spam.</p>
+          <label class="form-note" style="display:flex;gap:9px;align-items:flex-start;margin-top:2px"><input type="checkbox" name="supplier_contact_consent" value="yes" required style="margin-top:3px"> I agree ELX may contact me about this request. My contact details will only be shared with a supplier if I approve the match.</label>
         </form>
       </div>
 
@@ -510,7 +504,7 @@ textarea{min-height:130px;resize:vertical}
       <div class="panel" style="background:#fbfaf6">
         <div class="eyebrow">AI qualification</div>
         <h2 style="font-size:1.5rem">Try Lumber Scout first</h2>
-        <p class="section-lead" style="font-size:.93rem;margin-bottom:20px">Paste your list and Lumber Scout will normalize it, flag gaps, and prep a clean RFQ before it goes to suppliers.</p>
+        <p class="section-lead" style="font-size:.93rem;margin-bottom:20px">Get a first-pass material summary and a list of details suppliers may need. AI runs only when ELX configures its server-side service; otherwise Scout uses an in-browser keyword review. Neither verifies stock, code compliance, grades or pricing.</p>
 
         <form id="scoutForm">
           <div class="form-grid">
@@ -525,7 +519,7 @@ textarea{min-height:130px;resize:vertical}
             </div>
             <div class="field">
               <label>ZIP</label>
-              <input name="zip" placeholder="33101">
+              <input name="zip" placeholder="33101" inputmode="numeric" autocomplete="postal-code" pattern="^[0-9]{5}(-[0-9]{4})?$" maxlength="10" title="Enter a 5-digit US ZIP code or ZIP+4, such as 33101 or 33101-1234">
             </div>
             <div class="field full">
               <label>Project description</label>
@@ -560,13 +554,13 @@ textarea{min-height:130px;resize:vertical}
   <div class="container">
     <div class="section-head">
       <div class="eyebrow">Supplier side</div>
-      <h2>Turn empty sales hours into qualified RFQs.</h2>
-      <p class="section-lead">Only talk to buyers who have a real project and a defined material list. Founding suppliers get free listing and first lead credits in exchange for responsiveness data.</p>
+      <h2>Build a supplier network buyers can trust.</h2>
+        <p class="section-lead">ELX is validating a supplier network. Tell us what you sell and where you serve; there is no charge or promise of leads during this early stage.</p>
     </div>
     <div class="two-col">
       <div class="panel">
         <h3 style="color:var(--green);font-size:1.2rem;margin-bottom:16px">Launch supplier offer</h3>
-        <p style="color:var(--muted);font-size:.93rem;margin-bottom:20px">Founding Partner: free 30-day listing + first lead credits in exchange for service-area details and responsiveness. No risk, no setup fee.</p>
+        <p style="color:var(--muted);font-size:.93rem;margin-bottom:20px">Supplier applications help us understand product fit and coverage. We will contact you before publishing a profile or sharing any buyer request.</p>
         <a class="btn btn-primary" href="/suppliers.html">Join the supplier network →</a>
       </div>
       <div class="panel">
@@ -578,7 +572,7 @@ textarea{min-height:130px;resize:vertical}
         </div>
         <div class="listing">
           <span class="badge">Lead</span>
-          <div><h4>Qualified RFQ</h4><p>Buyer need · quantity · ZIP · urgency · contact</p></div>
+          <div><h4>Buyer-approved RFQ</h4><p>Request details shared only after the buyer approves a supplier match</p></div>
           <a class="btn btn-secondary" href="#quote">Example</a>
         </div>
       </div>
@@ -599,7 +593,7 @@ textarea{min-height:130px;resize:vertical}
       <div class="price-card">
         <small>Supplier Starter</small>
         <div class="price">$0</div>
-        <p>Free listing to seed the network during launch.</p>
+        <p>Free application during network validation. Directory publication requires your approval.</p>
         <ul>
           <li>Public business profile</li>
           <li>Service area + categories</li>
@@ -608,17 +602,17 @@ textarea{min-height:130px;resize:vertical}
         <a class="btn btn-secondary" href="/suppliers.html">Apply for listing</a>
       </div>
       <div class="price-card featured">
-        <div class="pill">CORE</div>
-        <small>Supplier Pro</small>
+        <div class="pill">CONCEPT</div>
+        <small>Supplier Pro · future idea</small>
         <div class="price">$149<span>/mo target</span></div>
-        <p>Visibility + qualified lead access for active territories.</p>
+        <p>Illustrative only. No paid plan, territory access or lead service is currently being sold.</p>
         <ul>
           <li>Priority directory placement</li>
           <li>Qualified RFQ alerts</li>
           <li>Lead dashboard + response tracking</li>
           <li>Featured category placement</li>
         </ul>
-        <a class="btn btn-primary" href="/suppliers.html">Become a founding partner</a>
+        <a class="btn btn-primary" href="/suppliers.html">Share supplier details</a>
       </div>
       <div class="price-card">
         <small>Commerce / Affiliate</small>
@@ -642,7 +636,7 @@ textarea{min-height:130px;resize:vertical}
     <div class="cta-band">
       <div>
         <h2>Own the demand before you own the inventory.</h2>
-        <p>One intake form. One AI qualification step. One supplier network to seed. The funnel proves itself before a cent goes into logistics.</p>
+        <p>One intake form. AI review when configured, with a local fallback. Supplier matching and lead delivery are handled manually while the network is validated.</p>
       </div>
       <a class="btn btn-sand btn-lg" href="#quote">Launch the quote funnel →</a>
     </div>
@@ -660,19 +654,19 @@ textarea{min-height:130px;resize:vertical}
     <div class="faq">
       <details open>
         <summary>Is this the same as the old Everglades Lumber?</summary>
-        <p>No. The business previously known as Everglades Lumber has permanently closed. Everglades Lumber Exchange (ELX) is a new, independently operated materials sourcing marketplace with no affiliation to any prior business operating under a similar name.</p>
+        <p>Everglades Lumber Exchange (ELX) is an independently operated materials sourcing marketplace. It does not claim to represent or be affiliated with any lumber supplier using a similar name. Contact each supplier directly to confirm its identity, current operations and capabilities.</p>
       </details>
       <details>
         <summary>Why not sell or dropship lumber directly?</summary>
-        <p>Large-format construction materials carry freight complexity, local-stock volatility and significant damage risk in transit. The first version monetizes the lead and routing layer instead. Commerce can be layered on for smaller, higher-margin products once demand is proven.</p>
+        <p>Large-format materials have local pricing, stock and delivery constraints. ELX starts by reviewing requests and researching possible suppliers. Any future commerce or referral model will be tested only after demand is proven.</p>
       </details>
       <details>
         <summary>What does Lumber Scout actually do?</summary>
-        <p>Lumber Scout normalizes a plain-English material request into a structured, supplier-ready RFQ. It groups materials into product families, flags missing dimensions or quantities, captures ZIP and urgency, and passes a clean request to matched local suppliers.</p>
+        <p>Lumber Scout creates a first-pass summary and material categories, and can flag missing details. AI is enabled only when ELX configures the server-side service; otherwise it uses a simple keyword review. It does not verify specifications, prices, stock or code compliance, and it does not send requests to suppliers.</p>
       </details>
       <details>
         <summary>How do suppliers get matched to my request?</summary>
-        <p>The matching layer uses territory, material categories, delivery radius, minimum order and response SLA to route each request to the right supplier set. As the supplier registry grows, the matches get tighter and faster.</p>
+        <p>Supplier research is handled manually while ELX validates the network. We consider product fit and delivery area, then confirm possible matches with you before sharing contact information.</p>
       </details>
       <details>
         <summary>Can this expand beyond South Florida?</summary>
@@ -680,7 +674,7 @@ textarea{min-height:130px;resize:vertical}
       </details>
       <details>
         <summary>What does it cost buyers to use ELX?</summary>
-        <p>Nothing. Buyers submit quote requests for free. The marketplace is supplier-funded through lead fees and directory placements.</p>
+        <p>Nothing. Buyers can submit quote requests for free. Future supplier fees or directory placements are launch ideas that ELX must validate before offering.</p>
       </details>
     </div>
   </div>
@@ -694,12 +688,7 @@ textarea{min-height:130px;resize:vertical}
     <div class="footer-grid">
       <div>
         <div class="footer-brand">
-          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="40" height="40" rx="10" fill="#1a4d38"/>
-            <path d="M8 28 L20 12 L32 28" stroke="#D4B883" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
-            <path d="M8 22 L20 6 L32 22" stroke="white" stroke-width="2" stroke-linejoin="round" fill="none" opacity="0.4"/>
-            <rect x="16" y="22" width="8" height="8" rx="1.5" fill="#D4B883"/>
-          </svg>
+          <img src="/assets/elx-mark.svg" alt="" width="36" height="36">
           <div class="footer-brand-text">EVERGLADES<small>LUMBER EXCHANGE</small></div>
         </div>
         <p>Independent materials sourcing marketplace connecting South Florida buyers with lumber yards and building material suppliers. Not affiliated with any prior business.</p>
@@ -735,7 +724,6 @@ const scoutForm   = document.querySelector('#scoutForm');
 const scoutOutput = document.querySelector('#scoutOutput');
 const scoutSubmit = document.querySelector('#scoutSubmit');
 
-// ── Fallback: local keyword matcher ──────────────────────────────────────────
 function localScout({ role, zip, project, urgency, materials }) {
   const text = `${project || ''} ${materials || ''}`.toLowerCase();
   const tags = [];
@@ -751,43 +739,22 @@ function localScout({ role, zip, project, urgency, materials }) {
   const intent = urgency === 'today' ? 'same-day / local-stock suppliers'
     : urgency === 'this-week' ? 'fast-turn suppliers' : 'competitive-quote suppliers';
   return {
-    summary: `${role || 'Buyer'} in ${zip || 'South Florida'}: ${project || 'building project'}. Best matched with ${intent}.`,
+    summary: `${role || 'Buyer'} ${zip ? `in ${zip}` : 'in South Florida'} needs ${project || 'building materials'}; requested timing: ${intent}.`,
     tags,
     quantities: null,
-    flags: null,
-    next: 'Submit the quote form below — this request gets routed to matched suppliers.'
+    flags: [!zip && 'Add the project ZIP code.', !materials && 'Add dimensions, grades, quantities and any treatment requirements you know.'].filter(Boolean).join(' '),
+    next: 'Review the draft, then choose whether to copy it into a quote request.'
   };
 }
 
-// ── Groq free-tier (llama-3.1-8b-instant, CORS-enabled) ──────────────────────
-async function groqScout(data) {
-  const GROQ_KEY = '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';
-  const prompt = `You are a lumber and building-materials expert serving South Florida contractors and builders.
-
-A buyer submitted this request:
-- Role: ${data.role || 'not specified'}
-- ZIP: ${data.zip || 'South Florida'}
-- Project: ${data.project || 'not specified'}
-- Materials: ${data.materials || 'not specified'}
-- Urgency: ${data.urgency || 'not specified'}
-
-Reply with ONLY valid JSON — no markdown, no explanation:
-{"summary":"One sentence describing the buyer and their need.","tags":["Category 1","Category 2"],"quantities":"Brief summary of quantities/sizes mentioned, or null","flags":"Missing info that would help suppliers quote accurately, or null","next":"One action sentence for the buyer."}`;
-
-  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+async function aiScout(data) {
+  const res = await fetch('/api/scout', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${GROQ_KEY}` },
-    body: JSON.stringify({
-      model: 'llama-3.1-8b-instant',
-      messages: [{ role: 'user', content: prompt }],
-      temperature: 0.3,
-      max_tokens: 300
-    })
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
   });
-  if (!res.ok) throw new Error(`Groq ${res.status}`);
-  const json = await res.json();
-  const raw = json.choices[0].message.content.trim().replace(/^```json\s*/,'').replace(/```$/,'');
-  return JSON.parse(raw);
+  if (!res.ok) throw new Error(`Scout service ${res.status}`);
+  return res.json();
 }
 
 // ── Chrome Built-in AI (Gemini Nano, no network) ──────────────────────────────
@@ -833,18 +800,29 @@ if (scoutForm) {
     scoutOutput.innerHTML = '<strong>Analyzing your request with AI…</strong>';
 
     let result;
+    let reviewMode = 'AI review';
     try {
-      result = await groqScout(data);
+      result = await aiScout(data);
     } catch(e1) {
       try {
-        scoutOutput.innerHTML = '<strong>Trying on-device AI…</strong>';
         result = await chromeAIScout(data);
+        reviewMode = 'On-device AI';
       } catch(e2) {
         result = localScout(data);
+        reviewMode = 'Local keyword review · no AI service configured';
       }
     }
 
-    scoutOutput.innerHTML = renderResult(result);
+    scoutOutput.innerHTML = `<p class="form-note">${reviewMode}. This is a draft, not a supplier match or technical review.</p>${renderResult(result)}<button class="btn btn-secondary" id="useScoutDraft" type="button" style="margin-top:12px">Use this draft in quote form</button>`;
+    document.querySelector('#useScoutDraft')?.addEventListener('click', () => {
+      const quote = document.querySelector('form[action*="formsubmit.co"]');
+      if (!quote) return;
+      const fields = Object.fromEntries(new FormData(scoutForm).entries());
+      quote.elements.zip.value = fields.zip || '';
+      quote.elements.materials.value = fields.materials || fields.project || '';
+      quote.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      quote.elements.zip.focus({ preventScroll: true });
+    });
     scoutSubmit.disabled = false;
     scoutSubmit.textContent = 'Run Lumber Scout →';
   });
