@@ -136,7 +136,7 @@ textarea{min-height:90px;resize:vertical}
           <h2 style="font-size:1.5rem">Tell us where you fit.</h2>
           <p style="color:var(--muted);font-size:.9rem;margin-bottom:20px">Share your service area and product fit. Submitting an application does not guarantee a listing or lead volume.</p>
 
-          <form action="https://formsubmit.co/hello@evergladeslumber.com" method="POST">
+          <form data-elx-intake="supplier" action="https://formsubmit.co/hello@evergladeslumber.com" method="POST">
             <input type="hidden" name="_subject" value="New ELX Supplier Application">
             <input type="hidden" name="_next" value="https://evergladeslumber.com/supplier-thank-you">
             <input type="hidden" name="_template" value="table">
@@ -156,7 +156,7 @@ textarea{min-height:90px;resize:vertical}
                 <input id="supplier-email" name="email" type="email" autocomplete="email" required placeholder="you@company.com">
               </div>
               <div class="field">
-                <label for="supplier-phone">Phone</label>
+                <label for="supplier-phone">Business phone</label>
                 <input id="supplier-phone" name="phone" type="tel" autocomplete="tel" placeholder="(305) 555-0100">
               </div>
               <div class="field">
@@ -181,14 +181,18 @@ textarea{min-height:90px;resize:vertical}
               </div>
             </div>
             <label class="form-note"><input type="checkbox" name="contact_consent" value="yes" required> I agree ELX may contact me about my supplier application.</label>
+            <label class="form-note"><input type="checkbox" name="listing_consent" value="yes"> Optional: if ELX independently verifies my business, I authorize a public profile with only the company name, business phone, city/service area, material categories and website I provided. I can ask ELX to remove it.</label>
             <button class="btn btn-primary" type="submit" style="width:100%;margin-top:4px">Apply as founding supplier →</button>
             <p class="form-note" style="margin-top:10px">Submitted information is used to review your application. Any public supplier profile requires your approval. This form does not create a binding agreement.</p>
+            <p class="form-note" data-intake-message role="status" aria-live="polite"></p>
           </form>
         </div>
       </div>
     </div>
   </section>
 </main>
+
+<script src="/assets/intake.js" defer></script>
 
 <footer class="footer">
   <div class="container footer-inner">

@@ -72,6 +72,7 @@ export async function onRequestPost({ request, env }) {
         max_tokens: 450,
         response_format: { type: "json_object" },
       }),
+      signal: AbortSignal.timeout(8_000),
     });
     if (!upstream.ok) return json({ error: "AI service is temporarily unavailable." }, 502);
     const completion = await upstream.json();

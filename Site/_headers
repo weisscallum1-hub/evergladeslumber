@@ -10,6 +10,12 @@
 /*.html
   Cache-Control: public, max-age=3600, must-revalidate
 
+/admin*
+  Cache-Control: no-store
+
+/assets/intake.js
+  Cache-Control: public, max-age=300, must-revalidate
+
 /robots.txt
   Cache-Control: public, max-age=86400
 

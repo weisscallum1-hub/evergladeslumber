@@ -1,5 +1,11 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+Disallow: /thank-you
 Disallow: /thank-you.html
+Disallow: /supplier-thank-you
+Disallow: /supplier-thank-you.html
 
 Sitemap: https://evergladeslumber.com/sitemap.xml

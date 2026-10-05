@@ -1,47 +1,85 @@
-# Everglades Lumber Exchange — Cloudflare Worker
+# Everglades Lumber Exchange — production operations
 
-The production service is the Cloudflare Worker `evergladeslumber`, connected to the GitHub repository `weisscallum1-hub/evergladeslumber`. Deploy from the repository root so Wrangler reads `wrangler.jsonc`, publishes `Site/` as static assets, and runs `worker.js` for `/api/scout`.
+Production is the Cloudflare Worker `evergladeslumber`, connected to `weisscallum1-hub/evergladeslumber`. The repository root contains `wrangler.jsonc`; the Worker serves `Site/`, `/api/scout`, `/api/intake`, `/api/admin/*`, and the public `/api/suppliers` feed. The live site keeps FormSubmit as a temporary fallback until the D1 inbox binding is configured.
 
-## Publish through the connected GitHub build
+## Production deployment
 
-1. In Cloudflare, open **Workers & Pages → evergladeslumber → Settings → Builds**. Confirm the connected repository, production branch, and root directory (repository root). Use no build command and `npx wrangler deploy` as the deploy command.
-2. In **Settings → Bindings**, add `GROQ_API_KEY` as an encrypted Secret for the Production Worker, then save/deploy. Optionally set `GROQ_MODEL`; the default is `openai/gpt-oss-20b`.
-3. Commit and push reviewed changes to the configured production branch. Cloudflare's connected build should publish the Worker and its assets together. Review the build result before treating the update as live.
+Cloudflare Workers Builds watches `main`. In **Workers & Pages → evergladeslumber → Settings → Builds**, use the repository root, no build command, and `npx wrangler deploy`. A push deploys the Worker and assets together; check the build result and live routes after each change. Do not use `wrangler pages deploy` or the static-file upload panel for this Worker.
 
-The static upload panel only accepts static assets; it cannot deploy the `/api/scout` Worker handler. Do not use `wrangler pages deploy` for this Worker.
+## Enable the structured lead inbox
 
-## Local deployment alternative
+1. Create a Cloudflare D1 database called `elx-leads` in the same account.
+2. Bind it to the `evergladeslumber` Worker as **`LEADS_DB`**. The runtime reads that exact binding name.
+3. Add the database binding to `wrangler.jsonc` so Git builds deploy it consistently:
 
-From the repository root, run `npx wrangler deploy`. This publishes to the Worker name in `wrangler.jsonc`. The command is a production deployment; check the Cloudflare account and Worker name before running it. Do not run it while a GitHub production build is in progress.
+   ```jsonc
+   "d1_databases": [
+     {
+       "binding": "LEADS_DB",
+       "database_name": "elx-leads",
+       "database_id": "PASTE_THE_DATABASE_ID_FROM_CLOUDFLARE"
+     }
+   ]
+   ```
 
-## Lumber Scout secret and limits
+4. Run the first migration against the remote database from this repository root:
 
-The API key is read only by the Worker at runtime. Never put it in `Site/` or browser JavaScript. A provider key was previously present in published browser code; revoke that old credential in the provider console and use only a replacement saved as the encrypted Cloudflare secret.
+   ```powershell
+   npx wrangler d1 execute elx-leads --remote --file=./migrations/0001_lead_inbox.sql
+   ```
 
-Without `GROQ_API_KEY`, Lumber Scout falls back to local keyword-based drafting. It does not verify inventory, pricing, specifications, code compliance, or supplier capability.
+5. Set `ADMIN_API_KEY` as an encrypted **Production Secret** with a random value of at least 32 characters. Keep it in a password manager; never put it in source control or the page URL. The private operations page is `/admin`; search crawlers are disallowed, but the API key is the actual access control.
+6. Commit the real database ID in `wrangler.jsonc`, push to `main`, and confirm Cloudflare reports a successful production deployment. Test with a synthetic request, then verify it appears in `/admin` and can be moved through the workflow. Do not use a real customer request as a test.
 
-## Forms and search
+Until steps 1–6 are complete, the website's forms fall back to the existing FormSubmit delivery route, and `/admin` cannot show an inbox. After D1 is active, requests are stored in D1; D1 is the system of record even if optional email notifications fail.
 
-Buyer quote and supplier application forms use FormSubmit to deliver to `hello@evergladeslumber.com`. Confirm mailbox routing and FormSubmit's one-time recipient confirmation. A thank-you page alone does not confirm email delivery.
+## Optional AI and email bindings
 
-Add `evergladeslumber.com` to Google Search Console, verify domain ownership, and submit `https://evergladeslumber.com/sitemap.xml`.
+In **Settings → Variables & Secrets**, configure for Production:
 
-## Site contents
+- `GROQ_API_KEY` as an encrypted Secret. It powers Scout and contact-detail-free first-pass intake triage. The key is server-only. `GROQ_MODEL` is optional and defaults to `openai/gpt-oss-20b`.
+- `TURNSTILE_SECRET_KEY` as an encrypted Secret and `TURNSTILE_SITE_KEY` as a public runtime variable. Create a Managed widget for `evergladeslumber.com` (and `www.evergladeslumber.com` if that hostname serves the form). When both keys and D1 are configured, the Worker requires Siteverify success for the correct hostname and `elx_intake` action.
+- `RESEND_API_KEY` as an encrypted Secret, after verifying the sending domain in Resend.
+- `ELX_FROM_EMAIL` as a plain runtime variable using an address on the verified domain, e.g. `Everglades Lumber Exchange <hello@evergladeslumber.com>`.
+- `ELX_NOTIFY_EMAIL` as a plain runtime variable set to the monitored ELX inbox.
 
-- `Site/index.html` — marketplace home and buyer intake
-- `Site/directory.html` — dated supplier research shortlist, not endorsements or confirmed partners
-- `Site/suppliers.html` — supplier application
-- `Site/thank-you.html` and `Site/supplier-thank-you.html` — form confirmations
-- `Site/privacy.html` and `Site/terms.html` — service disclosures
-- `Site/_headers`, `Site/_redirects`, `Site/robots.txt`, `Site/sitemap.xml`
-- `Site/assets/` — ELX mark and favicon
-- `worker.js` — Worker API routing and static asset delivery
-- `functions/api/scout.js` — request validation and Lumber Scout handler
+When all email settings are valid, the Worker sends a receipt to the person who submitted a form and a reference-only alert to ELX. No buyer details are included in the operations alert. D1 saves the request first; notification failure does not discard it. Until email is configured, review `/admin` regularly. Never paste secrets into this repository, email, or chat.
 
-## Operating workflow
+## What AI automates—and what it must not
 
-1. Review each buyer request manually; clarify size, grade/species, treatment/use class, quantity, ZIP, schedule, substitutions, and delivery access.
-2. Research suppliers for the exact material and service area. Confirm business identity, current stock, price validity, order minimum, delivery, lead time, and product documentation directly.
-3. Get the buyer's approval before sharing their contact details or RFQ with a supplier.
-4. Record quotes with date/time, expiration, quoted specifications, freight/tax treatment, and supplier contact. Compare like for like and state exclusions.
-5. Keep supplier directory facts dated and distinguish researched listings from partners or paid placements.
+- Lumber Scout groups likely product categories, restates the request, and flags missing details. A local rule-based review remains available without Groq.
+- Intake triage creates a first-pass summary and missing-detail list without sending contact name, email, or phone to Groq.
+- The authenticated inbox records buyer requests, supplier applications, status, internal notes, supplier-confirmed quotes, and activity history.
+- A supplier profile can appear in the separate public directory only when the supplier opted in **and** an ELX administrator independently verifies the business.
+- AI cannot confirm supplier identity, inventory, grade, price, code compliance, credit, delivery, or engineering. It does not contact a supplier, share buyer information, publish a profile, accept a quote, or commit to commercial terms. A buyer must approve any introduction before contact details are shared.
+
+## Supplier quote handling
+
+Record only a quote received directly from the named supplier. Enter exact specification and quantity, unit price, freight, tax, other fees, total, named FOB point, live stock/lead time, quote expiry, and supplier-approved payment terms. Compare like-for-like offers. The admin comparison is internal; it does not publish or send a quote to the buyer. ELX has no supplier inventory feed, checkout, payment processing, or automatically refreshed lumber prices.
+
+## Privacy and abuse controls
+
+`Site/privacy.html` describes the current data flow. D1 stores submitted form details and consent timestamp; only the buyer email is needed for service follow-up. Groq receives no contact name, email, or phone. The optional public-profile consent is separate from contact consent, and public cards expose only company name, business phone, location/service area, categories, and website. Do not expose the admin key in query parameters or browser storage. Turnstile is supported but must be configured in Production; also add a Cloudflare rate-limit rule before paid promotion. The honeypot and field checks alone are baseline controls, not a complete anti-bot defense. Review D1 daily limits and usage in Cloudflare, especially on the Workers Free plan: https://developers.cloudflare.com/d1/platform/pricing/.
+
+## Outreach prospect queue
+
+`SUPPLIER-OUTREACH.md` contains three first-pass Miami-Dade prospects, official published business email/contact links, product fit, and an opt-in outreach draft. They have not been contacted and are not ELX partners. Only use an authorized `hello@evergladeslumber.com` mailbox. Never share a buyer's request with suppliers during directory recruitment.
+
+## Search and discovery
+
+Add the property to Google Search Console, verify domain ownership, and submit `https://evergladeslumber.com/sitemap.xml`. Use Cloudflare Web Analytics or an equivalent privacy-reviewed analytics product before adding tracking code. Track quote-form starts/completions, qualified requests, supplier response time, quote coverage, and buyer approval rate. Do not interpret page views as marketplace traction without successful quote fulfillment.
+
+## Main files
+
+- `Site/index.html` — marketplace homepage, buyer intake, and Lumber Scout
+- `Site/directory.html` — opt-in verified supplier profiles plus separately labeled supplier research
+- `Site/suppliers.html` — supplier application and distinct optional listing consent
+- `Site/admin.html` — private inbox, human review, quote comparison, status and note updates
+- `functions/api/intake.js` — intake validation, D1 persistence, AI triage and optional transactional email
+- `functions/api/config.js` — public-only form security configuration (never returns secrets)
+- `functions/api/admin.js` — token-protected inbox, quote entry/status history, and published supplier feed
+- `functions/api/scout.js` — Lumber Scout API
+- `migrations/0001_lead_inbox.sql` — leads, activity, and supplier-quote schema
+- `worker.js`, `wrangler.jsonc` — routing, static assets and Worker bindings
+- `SUPPLIER-LEAD-REVIEW.md` — review of the two earlier inquiries; the DPR sender/domain mismatch remains unverified
+- `SUPPLIER-OUTREACH.md` — current South Florida supplier recruitment queue and outreach draft

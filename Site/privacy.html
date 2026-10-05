@@ -25,7 +25,7 @@ hr{border:0;border-top:1px solid var(--line);margin:36px 0}
 <div class="container">
   <a class="back" href="/">← Back to Everglades Lumber Exchange</a>
   <h1>Privacy Policy</h1>
-  <p class="date">Last updated: October 4, 2026</p>
+  <p class="date">Last updated: October 5, 2026</p>
 
   <p>Everglades Lumber Exchange ("ELX", "we", "us", "our") operates evergladeslumber.com (the "Site"). This policy explains what information we collect, how we use it, and your rights.</p>
 
@@ -47,7 +47,7 @@ hr{border:0;border-top:1px solid var(--line);margin:36px 0}
   <p>We do not sell your personal information to third parties.</p>
 
   <h2>Information sharing</h2>
-  <p>Quote request information is sent to FormSubmit to deliver it to ELX. Material details entered into Lumber Scout may be sent to our AI provider for request analysis when the AI service is configured; do not enter personal or confidential information in Lumber Scout. We review a request and contact you before sharing your contact details with a supplier. Supplier information submitted for directory listing may be published publicly on the Site.</p>
+  <p>When the structured inbox is configured, quote requests and supplier applications are stored in ELX's Cloudflare D1 database and reviewed by ELX. If that inbox is not configured, the forms use FormSubmit to deliver submissions to ELX. If transactional email is configured, Resend delivers a receipt to the submitting email address and a reference-only notification to ELX. Material details entered into Lumber Scout or the automated first-pass intake review may be sent without contact email, phone, or contact name to Groq when the AI service is configured. Do not enter personal or confidential details into Lumber Scout.</p>
 
   <h2>Data retention</h2>
   <p>We retain form submissions for as long as reasonably necessary to operate the service. You may request deletion of your data by emailing <a href="mailto:hello@evergladeslumber.com">hello@evergladeslumber.com</a>.</p>
@@ -56,7 +56,7 @@ hr{border:0;border-top:1px solid var(--line);margin:36px 0}
   <p>You have the right to access, correct, or delete personal information we hold about you. Contact us at <a href="mailto:hello@evergladeslumber.com">hello@evergladeslumber.com</a> to make a request.</p>
 
   <h2>Third-party services</h2>
-  <p>The Site uses FormSubmit (formsubmit.co) for form processing and Cloudflare Workers for hosting. When the server-side AI feature is configured and available, Lumber Scout sends the role, ZIP code, project description, material list and timing to Groq for a first-pass summary. It does not send the quote form's email or phone fields. If the AI service is unavailable, the site uses a local keyword review instead. Third-party services process data under their own privacy terms; ELX does not control their systems.</p>
+  <p>The Site uses Cloudflare Workers for hosting and, when enabled, Cloudflare D1 for the private lead inbox. FormSubmit is used as the form-delivery fallback until D1 intake is enabled. Optional transactional notifications use Resend. When configured, Cloudflare Turnstile processes security-challenge tokens and necessary browser/network signals to distinguish automated form traffic; its widget does not read form entries. When the server-side AI feature is configured, Lumber Scout and intake triage send the role, ZIP code, project description, material list, timing, or supplier product details to Groq for a first-pass review; contact names, emails, and phone numbers are excluded from AI requests. If AI is unavailable, intake triage uses local keyword rules and Scout uses a local keyword review. AI output is a draft and is never a supplier match, quote, technical determination, or publication approval. Each provider processes information under its own terms; ELX does not control its systems.</p>
 
   <h2>Changes to this policy</h2>
   <p>We may update this policy from time to time. Changes will be noted by the "Last updated" date at the top of this page.</p>
