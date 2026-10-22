@@ -12,8 +12,20 @@ function json(body, status = 200) {
   });
 }
 
+async function isRateLimited(request, env) {
+  if (!env.SCOUT_LIMITER) return false;
+  try {
+    const ip = request.headers.get("cf-connecting-ip") || "unknown";
+    const { success } = await env.SCOUT_LIMITER.limit({ key: ip });
+    return !success;
+  } catch {
+    return false;
+  }
+}
+
 export async function onRequestPost({ request, env }) {
   if (request.headers.get("origin") !== new URL(request.url).origin) return json({ error: "Request origin is not allowed." }, 403);
+  if (await isRateLimited(request, env)) return json({ error: "Too many Scout requests. Please wait a minute and try again." }, 429);
   const contentType = request.headers.get("content-type") || "";
   const declaredLength = Number(request.headers.get("content-length") || 0);
   if (!contentType.includes("application/json")) return json({ error: "Send JSON." }, 415);

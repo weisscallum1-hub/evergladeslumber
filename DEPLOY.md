@@ -1,6 +1,6 @@
 # Everglades Lumber Exchange — production operations
 
-Production is the Cloudflare Worker `evergladeslumber`, connected to `weisscallum1-hub/evergladeslumber`. The repository root contains `wrangler.jsonc`; the Worker serves `Site/`, `/api/scout`, `/api/intake`, `/api/admin/*`, and the public `/api/suppliers` feed. The live site keeps FormSubmit as a temporary fallback until the D1 inbox binding is configured.
+Production is the Cloudflare Worker `evergladeslumber`, connected to `weisscallum1-hub/evergladeslumber`. The repository root contains `wrangler.jsonc`; the Worker serves `Site/`, `/api/scout`, `/api/intake`, `/api/admin/*`, and the public `/api/suppliers` feed. The live site keeps FormSubmit as a temporary fallback until the D1 inbox binding is configured. The Worker screens obvious promotional pitches before taking this fallback, but the filter is not a substitute for Turnstile or human review.
 
 ## Production deployment
 
@@ -38,7 +38,7 @@ Until steps 1–6 are complete, the website's forms fall back to the existing Fo
 In **Settings → Variables & Secrets**, configure for Production:
 
 - `GROQ_API_KEY` as an encrypted Secret. It powers Scout and contact-detail-free first-pass intake triage. The key is server-only. `GROQ_MODEL` is optional and defaults to `openai/gpt-oss-20b`.
-- `TURNSTILE_SECRET_KEY` as an encrypted Secret and `TURNSTILE_SITE_KEY` as a public runtime variable. Create a Managed widget for `evergladeslumber.com` (and `www.evergladeslumber.com` if that hostname serves the form). When both keys and D1 are configured, the Worker requires Siteverify success for the correct hostname and `elx_intake` action.
+- `TURNSTILE_SECRET_KEY` as an encrypted Secret and `TURNSTILE_SITE_KEY` as a public runtime variable. Create a Managed widget for `evergladeslumber.com` (and `www.evergladeslumber.com` if that hostname serves the form). When both keys are configured, the Worker requires Siteverify success for the correct hostname and `elx_intake` action, including while the temporary FormSubmit fallback is active.
 - `RESEND_API_KEY` as an encrypted Secret, after verifying the sending domain in Resend.
 - `ELX_FROM_EMAIL` as a plain runtime variable using an address on the verified domain, e.g. `Everglades Lumber Exchange <hello@evergladeslumber.com>`.
 - `ELX_NOTIFY_EMAIL` as a plain runtime variable set to the monitored ELX inbox.
@@ -59,7 +59,7 @@ Record only a quote received directly from the named supplier. Enter exact speci
 
 ## Privacy and abuse controls
 
-`Site/privacy.html` describes the current data flow. D1 stores submitted form details and consent timestamp; only the buyer email is needed for service follow-up. Groq receives no contact name, email, or phone. The optional public-profile consent is separate from contact consent, and public cards expose only company name, business phone, location/service area, categories, and website. Do not expose the admin key in query parameters or browser storage. Turnstile is supported but must be configured in Production; also add a Cloudflare rate-limit rule before paid promotion. The honeypot and field checks alone are baseline controls, not a complete anti-bot defense. Review D1 daily limits and usage in Cloudflare, especially on the Workers Free plan: https://developers.cloudflare.com/d1/platform/pricing/.
+`Site/privacy.html` describes the current data flow. D1 stores submitted form details and consent timestamp; only the buyer email is needed for service follow-up. Groq receives no contact name, email, or phone. The optional public-profile consent is separate from contact consent, and public cards expose only company name, business phone, location/service area, categories, and website. Do not expose the admin key in query parameters or browser storage. The Worker applies approximate per-IP limits to intake (5 requests/minute) and Scout (12 requests/minute), and screens for obvious promotional links. Configure Turnstile in Production before promoting the forms; neither filter nor rate limit replaces it. Review D1 daily limits and usage in Cloudflare, especially on the Workers Free plan: https://developers.cloudflare.com/d1/platform/pricing/.
 
 ## Outreach prospect queue
 

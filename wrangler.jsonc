@@ -3,6 +3,18 @@
   "name": "evergladeslumber",
   "main": "worker.js",
   "compatibility_date": "2026-10-04",
+  "ratelimits": [
+    {
+      "name": "SCOUT_LIMITER",
+      "namespace_id": "2026102201",
+      "simple": { "limit": 12, "period": 60 }
+    },
+    {
+      "name": "INTAKE_LIMITER",
+      "namespace_id": "2026102202",
+      "simple": { "limit": 5, "period": 60 }
+    }
+  ],
   "assets": {
     "directory": "./Site",
     "binding": "ASSETS",

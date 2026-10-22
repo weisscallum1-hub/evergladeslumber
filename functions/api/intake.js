@@ -18,6 +18,25 @@ function text(value, max = MAX_TEXT_LENGTH) {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
 }
 
+function looksLikePromotionalSubmission(value) {
+  const content = value.toLowerCase();
+  const promotion = /\b(financing options?|check your eligibility|trusted by\s+\d|offer available|apply today|wholesale customer financing|call or text)\b/i.test(content);
+  const includesLink = /(?:https?:\/\/|www\.)/i.test(content);
+  const constructionTerms = /\b(lumber|plywood|osb|sheet goods|framing|deck(?:ing)?|fenc(?:e|ing)|rebar|concrete|drywall|roofing|shingles|treated|joist|beam|studs?|fasteners?|siding|millwork|cabinet|2x\d|4x\d)\b/i.test(content);
+  return promotion && includesLink && !constructionTerms;
+}
+
+async function isRateLimited(request, env) {
+  if (!env.INTAKE_LIMITER) return false;
+  try {
+    const ip = request.headers.get("cf-connecting-ip") || "unknown";
+    const { success } = await env.INTAKE_LIMITER.limit({ key: ip });
+    return !success;
+  } catch {
+    return false;
+  }
+}
+
 async function readJson(request) {
   const declaredLength = Number(request.headers.get("content-length") || 0);
   if (declaredLength > MAX_BODY_BYTES) throw new Error("too_large");
@@ -134,7 +153,7 @@ async function verifyTurnstile(request, input, env) {
 export async function onRequestPost({ request, env, ctx }) {
   if (request.headers.get("origin") !== new URL(request.url).origin) return json({ error: "Request origin is not allowed." }, 403);
   if (!(request.headers.get("content-type") || "").includes("application/json")) return json({ error: "Send JSON." }, 415);
-  if (!env.LEADS_DB) return json({ error: "Structured lead inbox is not configured yet.", fallback: true }, 503);
+  if (await isRateLimited(request, env)) return json({ error: "Too many requests from this connection. Please wait a minute and try again." }, 429);
 
   let input;
   try { input = await readJson(request); }
@@ -142,11 +161,10 @@ export async function onRequestPost({ request, env, ctx }) {
     if (error.message === "too_large") return json({ error: "Request is too large." }, 413);
     return json({ error: "Invalid or empty JSON request." }, 400);
   }
+  if (!input || typeof input !== "object" || Array.isArray(input)) return json({ error: "Invalid form data." }, 400);
 
   // Honeypot responses look successful to bots while storing no record.
   if (text(input?._honey, 200)) return json({ ok: true, accepted: true }, 202);
-  const challenge = await verifyTurnstile(request, input, env);
-  if (!challenge.ok) return json({ error: challenge.configurationError ? "Form verification is not configured correctly. Please email hello@evergladeslumber.com." : "Please complete the security check and try again." }, challenge.configurationError ? 503 : 400);
   const kind = input?.kind === "supplier" ? "supplier" : input?.kind === "buyer" ? "buyer" : "";
   if (!kind) return json({ error: "Unknown request type." }, 400);
 
@@ -165,8 +183,13 @@ export async function onRequestPost({ request, env, ctx }) {
   if (!VALID_EMAIL.test(data.email)) return json({ error: "Enter a valid email address." }, 400);
   if (kind === "buyer" && !VALID_ZIP.test(data.zip)) return json({ error: "Enter a valid 5-digit US ZIP code or ZIP+4." }, 400);
   if (kind === "buyer" && !data.materials) return json({ error: "Add the material list so we can review your request." }, 400);
+  if (kind === "buyer" && looksLikePromotionalSubmission(data.materials)) return json({ error: "This form is for building-material quote requests. Remove unrelated promotions and provide the products, quantities and job details." }, 400);
   if (kind === "supplier" && (!data.company || !data.contact || !data.location || !data.categories)) return json({ error: "Complete the required supplier details." }, 400);
   if (data.website && !/^https:\/\//i.test(data.website)) return json({ error: "Supplier website must start with https://." }, 400);
+
+  const challenge = await verifyTurnstile(request, input, env);
+  if (!challenge.ok) return json({ error: challenge.configurationError ? "Form verification is not configured correctly. Please email hello@evergladeslumber.com." : "Please complete the security check and try again." }, challenge.configurationError ? 503 : 400);
+  if (!env.LEADS_DB) return json({ error: "Structured lead inbox is not configured yet.", fallback: true }, 503);
 
   const suppliedId = text(input.submission_id, 36);
   const id = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(suppliedId) ? suppliedId : crypto.randomUUID();
