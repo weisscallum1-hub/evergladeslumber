@@ -1,44 +1,23 @@
 # Everglades Lumber Exchange — production operations
 
-Production is the Cloudflare Worker `evergladeslumber`, connected to `weisscallum1-hub/evergladeslumber`. The repository root contains `wrangler.jsonc`; the Worker serves `Site/`, `/api/scout`, `/api/intake`, `/api/admin/*`, and the public `/api/suppliers` feed. The live site keeps FormSubmit as a temporary fallback until the D1 inbox binding is configured. The Worker screens obvious promotional pitches before taking this fallback, but the filter is not a substitute for Turnstile or human review.
+Production is the Cloudflare Worker `evergladeslumber`, connected to `weisscallum1-hub/evergladeslumber`. The repository root contains `wrangler.jsonc`; the Worker serves `Site/`, `/api/scout`, `/api/intake`, `/api/admin/*`, and the public `/api/suppliers` feed. The live site stores submissions in D1. FormSubmit remains an emergency fallback only if the D1 binding is missing. Turnstile protects live buyer and supplier form submissions; human review is still required.
 
 ## Production deployment
 
 Cloudflare Workers Builds watches `main`. In **Workers & Pages → evergladeslumber → Settings → Builds**, use the repository root, no build command, and `npx wrangler deploy`. A push deploys the Worker and assets together; check the build result and live routes after each change. Do not use `wrangler pages deploy` or the static-file upload panel for this Worker.
 
-## Enable the structured lead inbox
+## Lead inbox production setup
 
-1. Create a Cloudflare D1 database called `elx-leads` in the same account.
-2. Bind it to the `evergladeslumber` Worker as **`LEADS_DB`**. The runtime reads that exact binding name.
-3. Add the database binding to `wrangler.jsonc` so Git builds deploy it consistently:
+The production D1 database `elx-leads` is bound as `LEADS_DB`. Migration `0001_lead_inbox.sql` is applied remotely. `ADMIN_API_KEY` is stored as an encrypted Worker secret; the admin page is `/admin` and requires that key. The database ID is safe to version in `wrangler.jsonc`. Never put the admin key in source control, a URL, or browser storage; save it in a password manager.
 
-   ```jsonc
-   "d1_databases": [
-     {
-       "binding": "LEADS_DB",
-       "database_name": "elx-leads",
-       "database_id": "PASTE_THE_DATABASE_ID_FROM_CLOUDFLARE"
-     }
-   ]
-   ```
-
-4. Run the first migration against the remote database from this repository root:
-
-   ```powershell
-   npx wrangler d1 execute elx-leads --remote --file=./migrations/0001_lead_inbox.sql
-   ```
-
-5. Set `ADMIN_API_KEY` as an encrypted **Production Secret** with a random value of at least 32 characters. Keep it in a password manager; never put it in source control or the page URL. The private operations page is `/admin`; search crawlers are disallowed, but the API key is the actual access control.
-6. Commit the real database ID in `wrangler.jsonc`, push to `main`, and confirm Cloudflare reports a successful production deployment. Test with a synthetic request, then verify it appears in `/admin` and can be moved through the workflow. Do not use a real customer request as a test.
-
-Until steps 1–6 are complete, the website's forms fall back to the existing FormSubmit delivery route, and `/admin` cannot show an inbox. After D1 is active, requests are stored in D1; D1 is the system of record even if optional email notifications fail.
+D1 is the system of record even if optional email notifications fail. Do not use a real customer request as a test.
 
 ## Optional AI and email bindings
 
 In **Settings → Variables & Secrets**, configure for Production:
 
 - `GROQ_API_KEY` as an encrypted Secret. It powers Scout and contact-detail-free first-pass intake triage. The key is server-only. `GROQ_MODEL` is optional and defaults to `openai/gpt-oss-20b`.
-- `TURNSTILE_SECRET_KEY` as an encrypted Secret and `TURNSTILE_SITE_KEY` as a public runtime variable. Create a Managed widget for `evergladeslumber.com` (and `www.evergladeslumber.com` if that hostname serves the form). When both keys are configured, the Worker requires Siteverify success for the correct hostname and `elx_intake` action, including while the temporary FormSubmit fallback is active.
+- `TURNSTILE_SECRET_KEY` is an encrypted Secret and `TURNSTILE_SITE_KEY` is a public runtime variable. A Managed widget is scoped to `evergladeslumber.com` and `www.evergladeslumber.com`. The Worker requires Siteverify success for the correct hostname and `elx_intake` action.
 - `RESEND_API_KEY` as an encrypted Secret, after verifying the sending domain in Resend.
 - `ELX_FROM_EMAIL` as a plain runtime variable using an address on the verified domain, e.g. `Everglades Lumber Exchange <hello@evergladeslumber.com>`.
 - `ELX_NOTIFY_EMAIL` as a plain runtime variable set to the monitored ELX inbox.
@@ -59,7 +38,7 @@ Record only a quote received directly from the named supplier. Enter exact speci
 
 ## Privacy and abuse controls
 
-`Site/privacy.html` describes the current data flow. D1 stores submitted form details and consent timestamp; only the buyer email is needed for service follow-up. Groq receives no contact name, email, or phone. The optional public-profile consent is separate from contact consent, and public cards expose only company name, business phone, location/service area, categories, and website. Do not expose the admin key in query parameters or browser storage. The Worker applies approximate per-IP limits to intake (5 requests/minute) and Scout (12 requests/minute), and screens for obvious promotional links. Configure Turnstile in Production before promoting the forms; neither filter nor rate limit replaces it. Review D1 daily limits and usage in Cloudflare, especially on the Workers Free plan: https://developers.cloudflare.com/d1/platform/pricing/.
+`Site/privacy.html` describes the current data flow. D1 stores submitted form details and consent timestamp; only the buyer email is needed for service follow-up. Groq receives no contact name, email, or phone. The optional public-profile consent is separate from contact consent, and public cards expose only company name, business phone, location/service area, categories, and website. Do not expose the admin key in query parameters or browser storage. The Worker applies per-IP limits to intake (5 requests/minute) and Scout (12 requests/minute), screens obvious promotional pitches, and requires Turnstile on submissions. Review D1 usage and limits in Cloudflare: https://developers.cloudflare.com/d1/platform/pricing/.
 
 ## Outreach prospect queue
 

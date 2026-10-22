@@ -1,5 +1,5 @@
-// Shared intake enhancement for buyer and supplier forms. The original FormSubmit
-// action remains available as a fallback until the D1 inbox is enabled.
+// Shared intake enhancement for buyer and supplier forms. The Worker saves to D1;
+// the original FormSubmit action remains an emergency fallback if D1 is unavailable.
 let turnstileLoader;
 
 function setMessage(form, value) {

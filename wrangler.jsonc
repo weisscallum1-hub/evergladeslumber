@@ -3,6 +3,16 @@
   "name": "evergladeslumber",
   "main": "worker.js",
   "compatibility_date": "2026-10-04",
+  "d1_databases": [
+    {
+      "binding": "LEADS_DB",
+      "database_name": "elx-leads",
+      "database_id": "8a44bd2a-374e-44ac-ad56-4abe430bd888"
+    }
+  ],
+  "vars": {
+    "TURNSTILE_SITE_KEY": "0x4AAAAAAFhSDoJJj7-cXSv0"
+  },
   "ratelimits": [
     {
       "name": "SCOUT_LIMITER",
