@@ -1,5 +1,5 @@
 // Shared intake enhancement for buyer and supplier forms. The Worker saves to D1;
-// the original FormSubmit action remains an emergency fallback if D1 is unavailable.
+// the original FormSubmit action remains a fallback if the D1 binding is missing.
 let turnstileLoader;
 
 function setMessage(form, value) {
