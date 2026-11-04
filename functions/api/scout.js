@@ -98,13 +98,16 @@ export async function onRequestPost({ request, env }) {
     }
     const completion = await upstream.json();
     const result = JSON.parse(completion?.choices?.[0]?.message?.content || "{}");
+    const flags = typeof result.flags === "string" ? result.flags.trim().slice(0, 700) : "";
     const tags = Array.isArray(result.tags) ? result.tags.filter((tag) => typeof tag === "string").slice(0, 8) : [];
     return json({
       summary: typeof result.summary === "string" ? result.summary.slice(0, 500) : "Material request reviewed.",
       tags,
       quantities: typeof result.quantities === "string" ? result.quantities.slice(0, 500) : "",
-      flags: typeof result.flags === "string" ? result.flags.slice(0, 700) : "",
-      next: typeof result.next === "string" ? result.next.slice(0, 300) : "Review the request details before asking suppliers to quote.",
+      flags,
+      next: flags
+        ? "Add the missing details above, then submit the quote request below for review."
+        : "Review this draft, then submit the quote request below for review.",
     });
   } catch (err) {
     console.error("scout failure", err && err.name, err && err.message);
