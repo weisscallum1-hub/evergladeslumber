@@ -86,7 +86,12 @@ export async function onRequestPost({ request, env }) {
       }),
       signal: AbortSignal.timeout(8_000),
     });
-    if (!upstream.ok) return json({ error: "AI service is temporarily unavailable." }, 502);
+    if (!upstream.ok) {
+      let detail = "";
+      try { detail = (await upstream.text()).slice(0, 300); } catch {}
+      console.error("scout upstream error", upstream.status, detail);
+      return json({ error: "AI service is temporarily unavailable.", upstream_status: upstream.status }, 502);
+    }
     const completion = await upstream.json();
     const result = JSON.parse(completion?.choices?.[0]?.message?.content || "{}");
     const tags = Array.isArray(result.tags) ? result.tags.filter((tag) => typeof tag === "string").slice(0, 8) : [];
@@ -97,8 +102,9 @@ export async function onRequestPost({ request, env }) {
       flags: typeof result.flags === "string" ? result.flags.slice(0, 700) : "",
       next: typeof result.next === "string" ? result.next.slice(0, 300) : "Review the request details before asking suppliers to quote.",
     });
-  } catch {
-    return json({ error: "AI service is temporarily unavailable." }, 502);
+  } catch (err) {
+    console.error("scout failure", err && err.name, err && err.message);
+    return json({ error: "AI service is temporarily unavailable.", upstream_status: err && err.name ? String(err.name) : "error" }, 502);
   }
 }
 
