@@ -16,6 +16,14 @@
 <meta property="og:url" content="https://evergladeslumber.com/">
 <meta property="og:title" content="Everglades Lumber Exchange | South Florida Materials Sourcing">
 <meta property="og:description" content="Request lumber and building-material quotes in South Florida. ELX reviews your list and confirms possible suppliers with you before sharing it.">
+<meta property="og:image" content="https://evergladeslumber.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Everglades Lumber Exchange, South Florida materials sourcing">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Everglades Lumber Exchange | South Florida Materials Sourcing">
+<meta name="twitter:description" content="Request lumber and building-material quotes in South Florida. ELX reviews your list and confirms possible suppliers with you before sharing it.">
+<meta name="twitter:image" content="https://evergladeslumber.com/assets/og-image.png">
 
 <!-- Schema -->
 <script type="application/ld+json">
@@ -759,8 +767,8 @@ function localScout({ role, zip, project, urgency, materials }) {
   const tags = [];
   const add = (needle, label) => { if (text.includes(needle) && !tags.includes(label)) tags.push(label); };
   add('plywood','Plywood / Panels');    add('osb','OSB / Sheathing');
-  add('2x','Dimensional Lumber');       add('2×','Dimensional Lumber'); add('treated','Pressure-Treated Lumber');
-  add('deck','Decking');                add('fence','Fencing');
+  add('2x','Dimensional Lumber');       add('2×','Dimensional Lumber'); add('treated','Pressure-Treated Lumber'); add('pressure','Pressure-Treated Lumber');
+  add('4x4','Posts / Timbers'); add('4×4','Posts / Timbers'); add('post','Posts / Timbers'); add('ground contact','Ground-Contact Rated'); add('syp','Southern Yellow Pine'); add('yellow pine','Southern Yellow Pine'); add(' pt ','Pressure-Treated Lumber'); add('deck','Decking');                add('fence','Fencing');
   add('rebar','Rebar');                 add('concrete','Concrete / Masonry');
   add('door','Doors / Millwork');       add('hardwood','Hardwood');
   add('cabinet','Cabinet-Grade Materials'); add('insulation','Insulation');
