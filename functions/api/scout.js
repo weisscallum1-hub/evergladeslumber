@@ -67,12 +67,14 @@ export async function onRequestPost({ request, env }) {
   if (!buyer.project && !buyer.materials) return json({ error: "Add a project description or material list." }, 400);
   if (!env.GROQ_API_KEY) return json({ error: "AI service is not configured." }, 503);
 
+  const model = env.GROQ_MODEL || "openai/gpt-oss-120b";
+  const isGptOss = model.startsWith("openai/gpt-oss");
   try {
     const upstream = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: { "content-type": "application/json", authorization: `Bearer ${env.GROQ_API_KEY}` },
       body: JSON.stringify({
-        model: env.GROQ_MODEL || "openai/gpt-oss-20b",
+        model,
         messages: [
           {
             role: "system",
@@ -81,7 +83,8 @@ export async function onRequestPost({ request, env }) {
           { role: "user", content: JSON.stringify(buyer) },
         ],
         temperature: 0.2,
-        max_tokens: 450,
+        max_tokens: isGptOss ? 1500 : 450,
+        ...(isGptOss ? { reasoning_effort: "low" } : {}),
         response_format: { type: "json_object" },
       }),
       signal: AbortSignal.timeout(8_000),
@@ -90,7 +93,7 @@ export async function onRequestPost({ request, env }) {
       let detail = "";
       try { detail = (await upstream.text()).slice(0, 300); } catch {}
       console.error("scout upstream error", upstream.status, detail);
-      return json({ error: "AI service is temporarily unavailable.", upstream_status: upstream.status }, 502);
+      return json({ error: "AI service is temporarily unavailable.", upstream_status: upstream.status, upstream_detail: detail.slice(0, 200) }, 502);
     }
     const completion = await upstream.json();
     const result = JSON.parse(completion?.choices?.[0]?.message?.content || "{}");

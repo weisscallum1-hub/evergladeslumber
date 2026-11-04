@@ -12,7 +12,7 @@
   ],
   "vars": {
     "TURNSTILE_SITE_KEY": "0x4AAAAAAFhSDoJJj7-cXSv0",
-    "GROQ_MODEL": "llama-3.1-8b-instant"
+    "GROQ_MODEL": "openai/gpt-oss-120b"
   },
   "ratelimits": [
     {
