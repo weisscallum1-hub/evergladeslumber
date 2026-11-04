@@ -94,7 +94,7 @@ export async function onRequestPost({ request, env }) {
       let detail = "";
       try { detail = (await upstream.text()).slice(0, 300); } catch {}
       console.error("scout upstream error", upstream.status, detail);
-      return json({ error: "AI service is temporarily unavailable.", upstream_status: upstream.status, upstream_detail: detail.slice(0, 200) }, 502);
+      return json({ error: "AI service is temporarily unavailable.", upstream_status: upstream.status }, 502);
     }
     const completion = await upstream.json();
     const result = JSON.parse(completion?.choices?.[0]?.message?.content || "{}");
