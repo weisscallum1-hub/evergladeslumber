@@ -67,6 +67,28 @@ function renderLead(lead){
     form.addEventListener('submit',async(event)=>{event.preventDefault();saveQuote.disabled=true;try{await api(`/api/admin/leads/${encodeURIComponent(lead.id)}/quotes`,{method:'POST',body:JSON.stringify(Object.fromEntries(new FormData(form).entries()))});statusline.textContent='Supplier quote recorded.';await loadLeads();}catch(error){statusline.textContent=error.message;}finally{saveQuote.disabled=false;}});
     article.append(quoteSection,form);
   }
+  if(lead.kind==='buyer'){
+    const orderSection=node('section');orderSection.append(node('h2','Orders and referral fee'));
+    const today=new Date().toISOString().slice(0,10);
+    if(lead.orders?.length){for(const order of lead.orders){
+      const card=node('div',undefined,'quote-card');
+      const overdue=order.referral_status!=='paid'&&order.referral_status!=='waived'&&order.due_on<today;
+      card.append(node('strong',`${order.supplier_name} · materials ${money(order.material_total_cents)} · referral ${money(order.referral_cents)} (${(order.referral_rate_bps/100).toFixed(2).replace(/\.00$/,'')}%)`));
+      card.append(node('p',`Ordered ${order.ordered_on} · due ${order.due_on}${overdue?' · OVERDUE':''} · status: ${order.referral_status}${order.paid_on?` · paid ${order.paid_on}`:''}`,overdue?'':'meta'));
+      if(order.notes)card.append(node('p',order.notes));
+      const sel=node('select');sel.setAttribute('aria-label','Referral status');
+      for(const v of ['pending','invoiced','paid','waived']){const o=node('option',v);o.value=v;o.selected=v===order.referral_status;sel.append(o);}
+      const sv=node('button','Update referral status','btn');sv.type='button';
+      sv.addEventListener('click',async()=>{sv.disabled=true;try{await api(`/api/admin/orders/${encodeURIComponent(order.id)}`,{method:'PATCH',body:JSON.stringify({referral_status:sel.value,notes:order.notes||''})});statusline.textContent='Referral status updated.';await loadLeads();}catch(error){statusline.textContent=error.message;}finally{sv.disabled=false;}});
+      card.append(sel,sv);orderSection.append(card);
+    }}else orderSection.append(node('p','No order recorded. When the buyer orders from a supplier, record the material total (before tax and delivery) to track the referral fee.','meta'));
+    const oform=document.createElement('form');oform.className='quote-grid';
+    for(const [name,label,type,required,val] of [['supplier_name','Supplier that got the order','text',true,''],['material_total','Material total USD (before tax and delivery)','number',true,''],['ordered_on','Order date','date',true,today],['rate_percent','Referral rate %','number',false,'5']]){const wrap=node('label',label);const input=document.createElement('input');input.name=name;input.type=type;input.required=required;if(val)input.value=val;if(type==='number'){input.min='0';input.step='0.01';}wrap.append(input);oform.append(wrap);}
+    const onotes=node('label','Notes (invoice number, agreement reference)');onotes.className='wide';const ota=document.createElement('textarea');ota.name='notes';onotes.append(ota);oform.append(onotes);
+    const osave=node('button','Record order','btn');osave.type='submit';oform.append(osave);
+    oform.addEventListener('submit',async(event)=>{event.preventDefault();osave.disabled=true;try{await api(`/api/admin/leads/${encodeURIComponent(lead.id)}/orders`,{method:'POST',body:JSON.stringify(Object.fromEntries(new FormData(oform).entries()))});statusline.textContent='Order recorded.';await loadLeads();}catch(error){statusline.textContent=error.message;}finally{osave.disabled=false;}});
+    article.append(orderSection,oform);
+  }
   if(lead.events?.length){const history=node('section',undefined,'history');history.append(node('strong','Activity history'));for(const event of lead.events)history.append(node('p',`${new Date(event.created_at).toLocaleString()} · ${event.event_type}${event.detail?.from?` · ${event.detail.from} → ${event.detail.to}`:''}${event.detail?.supplier_name?` · ${event.detail.supplier_name} · ${money(event.detail.total_cents)}`:''}`));article.append(history);}
   const controls=node('div',undefined,'actions');const status=node('select');status.setAttribute('aria-label','Lead status');
   for(const value of statusValues){const option=node('option',value);option.value=value;option.selected=value===lead.status;status.append(option);}
@@ -83,7 +105,8 @@ function renderLead(lead){
 async function loadLeads(){
   if(!adminKey){statusline.textContent='Enter the admin key to view the inbox.';return;}
   statusline.textContent='Loading requests…';leadsEl.replaceChildren();
-  try{const query=filter.value?`?status=${encodeURIComponent(filter.value)}`:'';const result=await api(`/api/admin/leads${query}`);document.querySelector('#count').textContent=`${result.leads.length} recent request${result.leads.length===1?'':'s'}`;for(const lead of result.leads)leadsEl.append(renderLead(lead));statusline.textContent=result.leads.length?'Inbox loaded.':'No requests in this view.';}
+  try{const query=filter.value?`?status=${encodeURIComponent(filter.value)}`:'';const result=await api(`/api/admin/leads${query}`);document.querySelector('#count').textContent=`${result.leads.length} recent request${result.leads.length===1?'':'s'}`;for(const lead of result.leads)leadsEl.append(renderLead(lead));const open=result.leads.flatMap(l=>l.orders||[]).filter(o=>o.referral_status==='pending'||o.referral_status==='invoiced');const owed=open.reduce((n,o)=>n+o.referral_cents,0);const day=new Date().toISOString().slice(0,10);const late=open.filter(o=>o.due_on<day).length;
+    statusline.textContent=(result.leads.length?'Inbox loaded.':'No requests in this view.')+(open.length?` Referral fees outstanding: ${money(owed)} across ${open.length} order${open.length===1?'':'s'}${late?` (${late} overdue)`:''}.`:'');}
   catch(error){statusline.textContent=error.message;document.querySelector('#count').textContent='';}
 }
 document.querySelector('#connect').addEventListener('click',()=>{adminKey=keyInput.value.trim();loadLeads();});
