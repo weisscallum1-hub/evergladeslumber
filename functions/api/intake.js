@@ -72,7 +72,7 @@ function localReview(kind, data) {
     summary: kind === "buyer" ? "Buyer request captured for human review." : "Supplier application captured for verification.",
     categories: [...new Set(categories)].slice(0, 8),
     missing_details: kind === "buyer"
-      ? [!data.zip && "job ZIP", !data.materials && "material list/specifications", !data.urgency && "timing"].filter(Boolean)
+      ? [!data.zip && "job ZIP", !data.materials && "material list/specifications", !data.urgency && "timing", data.fulfilment === "Delivery" && !data.delivery_address && "delivery address"].filter(Boolean)
       : [!data.location && "primary location", !data.categories && "product categories", !data.website && "business website"].filter(Boolean),
     review_required: true,
     automation_limit: "This draft does not verify a business, supplier match, stock, price, code requirement, or technical specification.",
@@ -82,7 +82,7 @@ function localReview(kind, data) {
 async function makeAiReview(kind, data, env) {
   const fallback = localReview(kind, data);
   if (!env.GROQ_API_KEY) return fallback;
-  const safeData = Object.fromEntries(Object.entries(data).filter(([key]) => !["email", "phone", "contact"].includes(key)));
+  const safeData = Object.fromEntries(Object.entries(data).filter(([key]) => !["email", "phone", "contact", "name", "delivery_address"].includes(key)));
   try {
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
@@ -171,7 +171,9 @@ export async function onRequestPost({ request, env, ctx }) {
   const data = kind === "buyer" ? {
     role: text(input.role, 100), zip: text(input.zip, 10), project_type: text(input.project_type, 100),
     urgency: text(input.urgency, 100), project: text(input.project, 1_000), materials: text(input.materials, 4_000),
-    email: text(input.email, 254).toLowerCase(),
+    name: text(input.name, 150), email: text(input.email, 254).toLowerCase(), phone: text(input.phone, 50),
+    fulfilment: text(input.fulfilment, 30), delivery_address: text(input.delivery_address, 300),
+    needed_by: /^\d{4}-\d{2}-\d{2}$/.test(text(input.needed_by, 10)) ? text(input.needed_by, 10) : "",
   } : {
     company: text(input.company, 200), contact: text(input.contact, 150), email: text(input.email, 254).toLowerCase(),
     phone: text(input.phone, 50), location: text(input.location, 200), radius: text(input.radius, 100),
